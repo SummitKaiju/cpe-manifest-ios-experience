@@ -10,7 +10,7 @@ struct CPEDataUtils {
     private static var _peopleExperienceName: String?
     static var peopleExperienceName: String {
         if _peopleExperienceName == nil {
-            if let title = CPEXMLSuite.current?.manifest.timedEvents?.first(where: { $0.isType(.person) })?.experience?.title, title.characters.count > 0 {
+            if let title = CPEXMLSuite.current?.manifest.timedEvents?.first(where: { $0.isType(.person) })?.experience?.title, title.count > 0 {
                 _peopleExperienceName = title
             } else {
                 _peopleExperienceName = String.localize("label.actors")
