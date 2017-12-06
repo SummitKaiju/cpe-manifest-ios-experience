@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                = 'CPEExperience'
-  s.version             = '4.0.0'
+  s.version             = '4.1.1'
   s.summary             = 'iOS User Experience for Cross-Platform Extras'
   s.license             = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.homepage            = 'https://github.com/warnerbros/cpe-manifest-ios-experience'
