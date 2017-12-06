@@ -133,7 +133,7 @@ class InMovieExperienceExtrasViewController: UIViewController {
     // MARK: Storyboard Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.ShowTalent, let talentDetailViewController = (segue.destination as? TalentDetailViewController), let talent = (sender as? Person) {
-            talentDetailViewController.title = String.localize("talentdetail.title")
+            talentDetailViewController.title = CPEDataUtils.personExperienceName
             talentDetailViewController.talent = talent
             talentDetailViewController.mode = TalentDetailMode.Synced
         }

@@ -19,6 +19,19 @@ struct CPEDataUtils {
 
         return _peopleExperienceName!
     }
+    
+    static var personExperienceName: String {
+        switch (peopleExperienceName) {
+        case String.localize("label.actors"):
+            return String.localize("label.actor")
+            
+        case String.localize("label.characters"):
+            return String.localize("label.character")
+            
+        default:
+            return peopleExperienceName
+        }
+    }
 
     private static var _peopleForDisplay: [Person]?
     static var peopleForDisplay: [Person]? {

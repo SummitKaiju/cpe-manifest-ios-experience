@@ -40,6 +40,9 @@
 // Menu labels
 "label.all" = "All";
 "label.actors" = "Actors";
+"label.actor" = "Actor";
+"label.characters" = "Characters";
+"label.character" = "Character";
 
 // Info text
 "info.leaving_app.title" = "Leaving App";
@@ -52,7 +55,6 @@
 "talent.show_less" = "Show Less";
 
 // Talent Detail
-"talentdetail.title" = "Actor";
 "talentdetail.biography" = "Biography";
 "talentdetail.gallery" = "Actor Gallery";
 "talentdetail.filmography" = "Filmography";
