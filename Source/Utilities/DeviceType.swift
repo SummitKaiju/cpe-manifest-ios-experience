@@ -16,6 +16,7 @@ public struct ScreenSize {
 public struct DeviceType {
 
     public static let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH >= 1024
+    public static let IS_IPHONE_X = UIDevice.current.userInterfaceIdiom == .phone && ScreenSize.SCREEN_MAX_LENGTH == 812
     public static let IS_SIMULATOR = (TARGET_OS_SIMULATOR != 0)
 
     public static var identifier: String? {
