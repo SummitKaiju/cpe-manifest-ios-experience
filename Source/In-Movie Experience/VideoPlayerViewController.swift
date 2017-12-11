@@ -86,6 +86,17 @@ class VideoPlayerViewController: UIViewController {
             static let AreWirelessRoutesAvailable = "areWirelessRoutesAvailable"
         }
     }
+    
+    private struct ObservationContexts {
+        static var Status = 0
+        static var Duration = 1
+        static var BufferEmpty = 2
+        static var PlaybackLikelyToKeepUp = 3
+        static var PresentationSize = 4
+        static var CurrentItem = 5
+        static var Rate = 6
+        static var ExternalPlayback = 7
+    }
 
     var mode = VideoPlayerMode.supplemental
     var shouldMute = false
@@ -117,15 +128,6 @@ class VideoPlayerViewController: UIViewController {
     private var isManuallyPaused = false
     private var isSeeking = false
     private var lastNotifiedTime = -1.0
-
-    private var VideoPlayerStatusObservationContext = 0
-    private var VideoPlayerDurationObservationContext = 1
-    private var VideoPlayerBufferEmptyObservationContext = 2
-    private var VideoPlayerPlaybackLikelyToKeepUpObservationContext = 3
-    private var VideoPlayerPresentationSizeContext = 4
-    private var VideoPlayerCurrentItemObservationContext = 5
-    private var VideoPlayerRateObservationContext = 6
-    private var VideoPlayerExternalPlaybackObservationContext = 7
 
     fileprivate var state = VideoPlayerState.unknown {
         didSet {
@@ -1020,7 +1022,7 @@ class VideoPlayerViewController: UIViewController {
      ** ------------------------------------------------------- */
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         /* AVPlayerItem "status" property value observer. */
-        if context == &VideoPlayerStatusObservationContext {
+        if context == &ObservationContexts.Status {
             if let statusNumber = (change?[NSKeyValueChangeKey.newKey] as? NSNumber)?.intValue, let status = AVPlayerStatus(rawValue: statusNumber) {
                 switch status {
                     /* Indicates that the status of the player is not yet known because
@@ -1049,13 +1051,13 @@ class VideoPlayerViewController: UIViewController {
             }
         }
         // AVPlayer "duration" property value observer
-        else if context == &VideoPlayerDurationObservationContext {
+        else if context == &ObservationContexts.Duration {
             if let duration = player?.currentItem?.duration.seconds {
                 playerItemDuration = duration
             }
         }
         /* AVPlayer "rate" property value observer. */
-        else if context == &VideoPlayerRateObservationContext {
+        else if context == &ObservationContexts.Rate {
             if let newRate = change?[NSKeyValueChangeKey.newKey] as? Bool, newRate {
                 state = .videoPlaying
             } else {
@@ -1063,7 +1065,7 @@ class VideoPlayerViewController: UIViewController {
             }
         }
         /* AVPlayer "externalPlaybackActive" propertly value observer. */
-        else if context == &VideoPlayerExternalPlaybackObservationContext {
+        else if context == &ObservationContexts.ExternalPlayback {
             if player != nil && player!.allowsExternalPlayback, let isAirPlayActive = change?[NSKeyValueChangeKey.newKey] as? Bool {
                 self.isAirPlayActive = isAirPlayActive
             }
@@ -1071,7 +1073,7 @@ class VideoPlayerViewController: UIViewController {
         /* AVPlayer "currentItem" property observer.
          Called when the AVPlayer replaceCurrentItemWithPlayerItem:
          replacement will/did occur. */
-        else if context == &VideoPlayerCurrentItemObservationContext {
+        else if context == &ObservationContexts.CurrentItem {
             /* Replacement of player currentItem has occurred */
             if (change?[NSKeyValueChangeKey.newKey] as? AVPlayerItem) != nil {
                 /* Set the AVPlayer for which the player layer displays visual output. */
@@ -1081,12 +1083,12 @@ class VideoPlayerViewController: UIViewController {
             } else {
                 playerControlsEnabled = false
             }
-        } else if context == &VideoPlayerBufferEmptyObservationContext {
+        } else if context == &ObservationContexts.BufferEmpty {
             state = .videoLoading
             if isPlaybackBufferEmpty && currentTime > 0 && currentTime < (playerItemDuration - 1) && isPlaying {
                 NotificationCenter.default.post(name: .videoPlayerPlaybackBufferEmpty, object: nil)
             }
-        } else if context == &VideoPlayerPlaybackLikelyToKeepUpObservationContext {
+        } else if context == &ObservationContexts.PlaybackLikelyToKeepUp {
             if state != .videoPaused && !isPlaying && isPlaybackLikelyToKeepUp {
                 NotificationCenter.default.post(name: .videoPlayerPlaybackLikelyToKeepUp, object: nil)
 
@@ -1094,7 +1096,7 @@ class VideoPlayerViewController: UIViewController {
                     playVideo()
                 }
             }
-        } else if context == &VideoPlayerPresentationSizeContext {
+        } else if context == &ObservationContexts.PresentationSize {
             updateToolbarButtons()
         } else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
@@ -1198,19 +1200,19 @@ class VideoPlayerViewController: UIViewController {
 
             /* Observe the AVPlayer "currentItem" property to find out when any
              AVPlayer replaceCurrentItemWithPlayerItem: replacement will/did occur.*/
-            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItem, options: [.initial, .new], context: &VideoPlayerCurrentItemObservationContext)
+            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItem, options: [.initial, .new], context: &ObservationContexts.CurrentItem)
 
             /* Observe the AVPlayer "rate" property to update the scrubber control. */
-            player!.addObserver(self, forKeyPath: Constants.Keys.Rate, options: [.initial, .new], context: &VideoPlayerRateObservationContext)
+            player!.addObserver(self, forKeyPath: Constants.Keys.Rate, options: [.initial, .new], context: &ObservationContexts.Rate)
 
             /* Observer the AVPlayer "externalPlaybackActive" property to update the UI when AirPlay connects or disconnects. */
-            player!.addObserver(self, forKeyPath: Constants.Keys.ExternalPlaybackActive, options: [.initial, .new], context: &VideoPlayerExternalPlaybackObservationContext)
+            player!.addObserver(self, forKeyPath: Constants.Keys.ExternalPlaybackActive, options: [.initial, .new], context: &ObservationContexts.ExternalPlayback)
 
-            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemStatus, options: [.initial, .new], context: &VideoPlayerStatusObservationContext)
-            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemDuration, options: [.initial, .new], context: &VideoPlayerDurationObservationContext)
-            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemPlaybackBufferEmpty, options: .new, context: &VideoPlayerBufferEmptyObservationContext)
-            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemPlaybackLikelyToKeepUp, options: .new, context: &VideoPlayerPlaybackLikelyToKeepUpObservationContext)
-            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemPresentationSize, options: .new, context: &VideoPlayerPresentationSizeContext)
+            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemStatus, options: [.initial, .new], context: &ObservationContexts.Status)
+            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemDuration, options: [.initial, .new], context: &ObservationContexts.Duration)
+            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemPlaybackBufferEmpty, options: .new, context: &ObservationContexts.BufferEmpty)
+            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemPlaybackLikelyToKeepUp, options: .new, context: &ObservationContexts.PlaybackLikelyToKeepUp)
+            player!.addObserver(self, forKeyPath: Constants.Keys.CurrentItemPresentationSize, options: .new, context: &ObservationContexts.PresentationSize)
         } else {
             player!.allowsExternalPlayback = airPlayEnabled
         }
@@ -1475,10 +1477,12 @@ class VideoPlayerViewController: UIViewController {
 
             DispatchQueue.global(qos: .background).async {
                 if let closestClipShareTimedEvent = CPEXMLSuite.current?.manifest.closestTimedEvent(toTimecode: self.currentTime, type: .clipShare) {
-                    if !self.playbackOverlayView.isHidden && closestClipShareTimedEvent != self.playbackOverlayTimedEvent {
-                        if let imageURL = closestClipShareTimedEvent.thumbnailImageURL {
-                            self.playbackOverlayImageView.sd_setImage(with: imageURL)
-                            self.playbackOverlayTimedEvent = closestClipShareTimedEvent
+                    DispatchQueue.main.async {
+                        if !self.playbackOverlayView.isHidden && closestClipShareTimedEvent != self.playbackOverlayTimedEvent {
+                            if let imageURL = closestClipShareTimedEvent.thumbnailImageURL {
+                                self.playbackOverlayImageView.sd_setImage(with: imageURL)
+                                self.playbackOverlayTimedEvent = closestClipShareTimedEvent
+                            }
                         }
                     }
                 }
