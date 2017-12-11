@@ -89,6 +89,10 @@ open class WebViewController: UIViewController {
 
         hud = MBProgressHUD.showAdded(to: webView, animated: true)
     }
+    
+    override open func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
 
     // MARK: Actions
     open func close() {

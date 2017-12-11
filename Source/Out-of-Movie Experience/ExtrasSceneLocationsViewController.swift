@@ -193,6 +193,9 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
         containerTopConstraint?.constant = (toLandscape ? 0 : ExtrasExperienceViewController.Constants.TitleImageHeight)
         containerBottomConstraint?.isActive = !toLandscape
         containerBottomInnerConstraint?.isActive = !toLandscape
+        if #available(iOS 11.0, *) {
+            self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
 
         coordinator.animate(alongsideTransition: nil, completion: { (_) in
             self.galleryScrollView.layoutPages()
@@ -213,6 +216,10 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
         }
 
         return .all
+    }
+    
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return (containerBottomConstraint != nil && !containerBottomConstraint!.isActive)
     }
 
     private func playVideo(fromExperience experience: Experience) {
