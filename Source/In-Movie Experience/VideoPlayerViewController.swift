@@ -1614,15 +1614,22 @@ class VideoPlayerViewController: UIViewController {
             hasSeekedToPlaybackSyncStartTime = true
         } else if let player = player {
             let timescale = (player.currentItem?.duration.timescale ?? 1)
-            player.seek(to: CMTimeMakeWithSeconds(time, timescale), toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
-                if finished {
-                    DispatchQueue.main.async {
-                        self?.isSeeking = false
-                        self?.hasSeekedToPlaybackSyncStartTime = true
-                        self?.playVideo()
+            let scaledTime = CMTimeMakeWithSeconds(time, timescale)
+            if scaledTime.isValid {
+                player.seek(to: scaledTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
+                    if finished {
+                        DispatchQueue.main.async {
+                            self?.isSeeking = false
+                            self?.hasSeekedToPlaybackSyncStartTime = true
+                            self?.playVideo()
+                        }
                     }
-                }
-            })
+                })
+            } else {
+                isSeeking = false
+                hasSeekedToPlaybackSyncStartTime = true
+                playVideo()
+            }
         }
     }
 
