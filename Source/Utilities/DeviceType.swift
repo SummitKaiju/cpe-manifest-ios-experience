@@ -13,6 +13,12 @@ public struct ScreenSize {
 
 }
 
+public struct StatusBarSize {
+    
+    public static let HEIGHT: CGFloat = (DeviceType.IS_IPHONE_X ? 44 : 0)
+    
+}
+
 public struct DeviceType {
 
     public static let IS_IPAD = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH >= 1024

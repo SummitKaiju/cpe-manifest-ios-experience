@@ -12,8 +12,9 @@ class InMovieExperienceViewController: UIViewController {
 
     @IBOutlet weak var playerContainerView: UIView!
     @IBOutlet weak var extrasContainerView: UIView!
-    @IBOutlet var playerToExtrasConstarint: NSLayoutConstraint!
-    @IBOutlet var playerToSuperviewConstraint: NSLayoutConstraint!
+    @IBOutlet var playerToExtrasConstraint: NSLayoutConstraint!
+    @IBOutlet var playerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var playerAspectRatioConstraint: NSLayoutConstraint!
 
     private var externalPlaybackDidToggleObserver: NSObjectProtocol?
 
@@ -74,10 +75,15 @@ class InMovieExperienceViewController: UIViewController {
         extrasContainerViewHidden = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
         updatePlayerConstraints()
     }
+    
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return extrasContainerViewHidden
+    }
 
     private func updatePlayerConstraints() {
-        playerToExtrasConstarint.isActive = !extrasContainerView.isHidden
-        playerToSuperviewConstraint.isActive = !playerToExtrasConstarint.isActive
+        playerToExtrasConstraint.isActive = !extrasContainerView.isHidden
+        playerAspectRatioConstraint.isActive = playerToExtrasConstraint.isActive
+        playerHeightConstraint.isActive = !playerToExtrasConstraint.isActive
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -101,6 +107,9 @@ class InMovieExperienceViewController: UIViewController {
 
         extrasContainerViewHidden = size.width > size.height
         updatePlayerConstraints()
+        if #available(iOS 11.0, *) {
+            self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
 
         if let videoPlayerViewController = videoPlayerViewController {
             if extrasContainerView.isHidden {

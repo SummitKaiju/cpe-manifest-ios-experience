@@ -900,6 +900,9 @@ class VideoPlayerViewController: UIViewController {
         if didPlayInterstitial {
             playerControlsVisible = true
             initAutoHideTimer()
+            coordinator.animate(alongsideTransition: nil, completion: { (_) in
+                self.updateToolbarButtons()
+            })
         } else {
             countdownProgressView?.frame = skipCountdownContainerView.frame
         }
