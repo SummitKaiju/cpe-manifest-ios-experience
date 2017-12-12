@@ -131,7 +131,7 @@ class ExtrasExperienceViewController: UIViewController {
     internal func headerButton(_ title: String, imageName: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.isHidden = true
-        button.frame = CGRect(x: 0, y: 0, width: Constants.HeaderButtonWidth, height: Constants.TitleImageHeight)
+        button.frame = CGRect(x: 0, y: StatusBarSize.HEIGHT, width: Constants.HeaderButtonWidth, height: Constants.TitleImageHeight)
         button.contentHorizontalAlignment = .left
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: Constants.HeaderIconPadding + 10, bottom: 0, right: 0)
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: Constants.HeaderIconPadding, bottom: 0, right: 0)

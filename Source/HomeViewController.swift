@@ -313,7 +313,7 @@ class HomeViewController: UIViewController {
             let viewAspectRatio = viewWidth / viewHeight
 
             if backgroundVideoSize != CGSize.zero {
-                var backgroundPoint = CGPoint.zero
+                var backgroundPoint = CGPoint(x: 0, y: StatusBarSize.HEIGHT)
                 var backgroundSize = CGSize.zero
                 let backgroundVideoAspectRatio = backgroundVideoSize.width / backgroundVideoSize.height
 

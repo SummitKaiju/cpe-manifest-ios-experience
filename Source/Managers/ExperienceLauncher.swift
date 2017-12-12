@@ -5,6 +5,7 @@
 import UIKit
 import CPEData
 import ReachabilitySwift
+import SDWebImage
 
 open  class ExperienceLauncher {
 
@@ -14,11 +15,7 @@ open  class ExperienceLauncher {
     static var isBeingDismissed = false
 
     open static func launch(fromViewController viewController: UIViewController) {
-        delegate?.experienceWillOpen()
-
-        let homeViewController = UIStoryboard.viewController(for: HomeViewController.self) as? HomeViewController
-        viewController.present(homeViewController!, animated: true, completion: nil)
-
+        SDWebImageCodersManager.sharedInstance().coders = [SimpleImageIOCoder.shared()]
         reachabilityChangedObserver = NotificationCenter.default.addObserver(forName: ReachabilityChangedNotification, object: reachability, queue: OperationQueue.main) { (notification) in
             if let reachability = notification.object as? Reachability {
                 if reachability.isReachable {
@@ -38,6 +35,10 @@ open  class ExperienceLauncher {
         } catch {
             print("Unable to start reachability notifier: \(error)")
         }
+        
+        delegate?.experienceWillOpen()
+        let homeViewController = UIStoryboard.viewController(for: HomeViewController.self) as? HomeViewController
+        viewController.present(homeViewController!, animated: true, completion: nil)
     }
 
     open static func close() {

@@ -150,6 +150,13 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController {
         containerAspectRatioConstraint?.isActive = !toLandscape
         containerTopConstraint?.constant = (toLandscape ? 0 : ExtrasExperienceViewController.Constants.TitleImageHeight)
         containerBottomConstraint?.isActive = !toLandscape
+        if #available(iOS 11.0, *) {
+            self.setNeedsUpdateOfHomeIndicatorAutoHidden()
+        }
+    }
+    
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return (containerBottomConstraint != nil && !containerBottomConstraint!.isActive)
     }
 
     private func playSelectedExperience() {

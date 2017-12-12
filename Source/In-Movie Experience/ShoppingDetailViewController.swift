@@ -117,6 +117,9 @@ class ShoppingDetailViewController: SceneDetailViewController {
         super.viewWillLayoutSubviews()
 
         productMatchIcon.layer.cornerRadius = (productMatchIcon.frame.width / 2)
+        if mode == .extras {
+            closeButton.frame.origin.y = StatusBarSize.HEIGHT
+        }
     }
 
     // MARK: Actions
