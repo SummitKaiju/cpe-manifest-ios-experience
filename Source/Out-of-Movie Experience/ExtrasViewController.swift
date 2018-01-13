@@ -12,6 +12,7 @@ class ExtrasViewController: ExtrasExperienceViewController {
         static let CollectionViewLineSpacing: CGFloat = (DeviceType.IS_IPAD ? 12 : 25)
         static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
         static let CollectionViewItemAspectRatio: CGFloat = 318 / 224
+        static let TableViewHeaderHeight: CGFloat = 35
     }
 
     fileprivate struct SegueIdentifier {
@@ -27,11 +28,14 @@ class ExtrasViewController: ExtrasExperienceViewController {
     @IBOutlet weak private var talentDetailView: UIView?
     @IBOutlet private var extrasCollectionView: UICollectionView!
 
+    fileprivate var personSegmentedControl: UISegmentedControl?
+    fileprivate var talentTableHeaderView: UIView?
     private var talentDetailViewController: TalentDetailViewController?
+    fileprivate var currentPersonJobFunction = PersonJobFunction.actor
     fileprivate var selectedIndexPath: IndexPath?
 
-    fileprivate var showActorsInGrid: Bool {
-        return (!DeviceType.IS_IPAD && CPEDataUtils.hasPeopleForDisplay)
+    fileprivate var showPeopleInGrid: Bool {
+        return (!DeviceType.IS_IPAD && CPEDataUtils.numPersonJobFunctions > 0)
     }
 
     // MARK: View Lifecycle
@@ -40,7 +44,7 @@ class ExtrasViewController: ExtrasExperienceViewController {
 
         experience = CPEXMLSuite.current!.manifest.outOfMovieExperience
 
-        if let talentTableView = talentTableView, CPEDataUtils.hasPeopleForDisplay {
+        if let talentTableView = talentTableView, CPEDataUtils.people != nil {
             talentTableView.register(UINib(nibName: TalentTableViewCell.NibNameWide, bundle: Bundle.frameworkResources), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
             talentTableView.contentInset = UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
         } else {
@@ -131,10 +135,21 @@ class ExtrasViewController: ExtrasExperienceViewController {
             completed?()
         }
     }
+    
+    @objc fileprivate func onSelectPersonJobFunction() {
+        if let index = personSegmentedControl?.selectedSegmentIndex, let jobFunctions = CPEDataUtils.personJobFunctions, jobFunctions.count > index {
+            currentPersonJobFunction = Array(jobFunctions)[index]
+            hideTalentDetailView()
+            talentTableView?.reloadData()
+        }
+    }
 
     // MARK: Storyboard
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let viewController = segue.destination as? ExtrasExperienceViewController, let experience = sender as? Experience {
+        if segue.identifier == SegueIdentifier.ShowTalentSelector, let viewController = segue.destination as? ExtrasTalentSelectorViewController, let personJobFunction = sender as? PersonJobFunction {
+            viewController.personJobFunction = personJobFunction
+            viewController.experience = CPEXMLSuite.current!.manifest.mainExperience
+        } else if let viewController = segue.destination as? ExtrasExperienceViewController, let experience = sender as? Experience {
             viewController.experience = experience
         }
     }
@@ -144,7 +159,28 @@ class ExtrasViewController: ExtrasExperienceViewController {
 extension ExtrasViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CPEDataUtils.numPeopleForDisplay
+        return (CPEDataUtils.people?[currentPersonJobFunction]?.count ?? 0)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if CPEDataUtils.numPersonJobFunctions > 1 && talentTableHeaderView == nil {
+            personSegmentedControl = UISegmentedControl(items: CPEDataUtils.personJobFunctions?.map({ CPEDataUtils.titleForPeople(with: $0).uppercased() }))
+            personSegmentedControl?.frame = CGRect(x: 10, y: 0, width: tableView.frame.width - 20, height: Constants.TableViewHeaderHeight - 10)
+            personSegmentedControl?.tintColor = .themePrimary
+            personSegmentedControl?.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 10)], for: .normal)
+            personSegmentedControl?.selectedSegmentIndex = 0
+            personSegmentedControl?.addTarget(self, action: #selector(onSelectPersonJobFunction), for: .valueChanged)
+            
+            talentTableHeaderView = UIView()
+            talentTableHeaderView?.addSubview(personSegmentedControl!)
+        }
+        
+        return talentTableHeaderView
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return (CPEDataUtils.numPersonJobFunctions > 1 ? Constants.TableViewHeaderHeight : 0)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,7 +189,7 @@ extension ExtrasViewController: UITableViewDataSource {
             return tableViewCell
         }
 
-        if let people = CPEDataUtils.peopleForDisplay, people.count > indexPath.row {
+        if let people = CPEDataUtils.people?[currentPersonJobFunction], people.count > indexPath.row {
             cell.talent = people[indexPath.row]
         }
 
@@ -193,7 +229,7 @@ extension ExtrasViewController: TalentDetailViewPresenter {
 extension ExtrasViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (showActorsInGrid ? (experience.numChildExperiences + 1) : experience.numChildExperiences)
+        return (showPeopleInGrid ? (experience.numChildExperiences + CPEDataUtils.numPersonJobFunctions) : experience.numChildExperiences)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -203,11 +239,12 @@ extension ExtrasViewController: UICollectionViewDataSource {
         }
 
         var childExperienceIndex = indexPath.row
-        if showActorsInGrid {
-            if childExperienceIndex == 0 {
+        if showPeopleInGrid {
+            if childExperienceIndex < CPEDataUtils.numPersonJobFunctions {
+                let jobFunction = CPEDataUtils.personJobFunctions![childExperienceIndex]
                 cell.experience = nil
-                cell.title = CPEDataUtils.peopleExperienceName
-                cell.imageURL = CPEDataUtils.peopleForDisplay?.first?.thumbnailImageURL
+                cell.title = CPEDataUtils.titleForPeople(with: jobFunction)
+                cell.imageURL = CPEDataUtils.people?[jobFunction]?.first?.thumbnailImageURL
                 cell.imageView.contentMode = .scaleAspectFit
                 return cell
             }
@@ -226,9 +263,9 @@ extension ExtrasViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var childExperienceIndex = indexPath.row
-        if showActorsInGrid {
-            if childExperienceIndex == 0 {
-                self.performSegue(withIdentifier: SegueIdentifier.ShowTalentSelector, sender: CPEXMLSuite.current!.manifest.mainExperience)
+        if showPeopleInGrid {
+            if childExperienceIndex < CPEDataUtils.numPersonJobFunctions {
+                self.performSegue(withIdentifier: SegueIdentifier.ShowTalentSelector, sender: CPEDataUtils.personJobFunctions?[childExperienceIndex])
                 return
             }
 

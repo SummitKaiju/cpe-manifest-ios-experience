@@ -10,13 +10,15 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController {
 
     @IBOutlet private weak var talentTableView: UITableView!
     @IBOutlet private weak var talentDetailView: UIView!
+    
+    var personJobFunction = PersonJobFunction.actor
 
     private var talentDetailViewController: TalentDetailViewController?
     fileprivate var selectedIndexPath: IndexPath?
 
     // MARK: View Lifecycle
     override func viewDidLoad() {
-        customTitle = CPEDataUtils.peopleExperienceName
+        customTitle = CPEDataUtils.titleForPeople(with: personJobFunction)
 
         super.viewDidLoad()
 
@@ -103,7 +105,7 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController {
 extension ExtrasTalentSelectorViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CPEDataUtils.numPeopleForDisplay
+        return (CPEDataUtils.people?[personJobFunction]?.count ?? 0)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,7 +114,7 @@ extension ExtrasTalentSelectorViewController: UITableViewDataSource {
             return tableViewCell
         }
 
-        if let people = CPEDataUtils.peopleForDisplay, people.count > indexPath.row {
+        if let people = CPEDataUtils.people?[personJobFunction], people.count > indexPath.row {
             cell.talent = people[indexPath.row]
         }
 

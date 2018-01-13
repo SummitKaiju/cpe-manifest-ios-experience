@@ -20,7 +20,6 @@ class ExtrasExperienceListViewController: ExtrasExperienceViewController {
         static let ShowMap = "ExtrasMapSegue"
         static let ShowShopping = "ExtrasShoppingSegue"
         static let ShowList = "ExtrasListSegue"
-        static let ShowTalentSelector = "TalentSelectorSegueIdentifier"
     }
 
     @IBOutlet var extrasCollectionView: UICollectionView!

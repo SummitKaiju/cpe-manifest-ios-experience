@@ -51,7 +51,6 @@ open  class ExperienceLauncher {
 
         delegate?.experienceWillClose()
         CacheManager.clearTempDirectory()
-        CPEDataUtils.reset()
         UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true) {
             ExperienceLauncher.isBeingDismissed = false
             CPEXMLSuite.current = nil
