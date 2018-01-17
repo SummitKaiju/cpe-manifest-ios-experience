@@ -10,6 +10,9 @@ class InMovieExperienceExtrasViewController: UIViewController {
     fileprivate struct Constants {
         static let HeaderHeight: CGFloat = 35
         static let FooterHeight: CGFloat = 45
+        static let SegmentedControlPadding: CGFloat = (DeviceType.IS_IPAD ? 10 : 5)
+        static let SegmentedControlFontSize: CGFloat = (DeviceType.IS_IPAD ? 10 : 9)
+        static let SegmentedControlHeight: CGFloat = 30
     }
 
     fileprivate struct SegueIdentifier {
@@ -174,10 +177,19 @@ extension InMovieExperienceExtrasViewController: UITableViewDataSource {
         }
         
         if talentTableHeaderView == nil {
-            personSegmentedControl = UISegmentedControl(items: CPEDataUtils.personJobFunctions?.map({ CPEDataUtils.titleForPeople(with: $0) }))
-            personSegmentedControl?.frame = CGRect(x: 10, y: 0, width: tableView.frame.width - 20, height: 30)
-            personSegmentedControl?.tintColor = .themePrimary
-            personSegmentedControl?.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 10)], for: .normal)
+            if #available(iOS 9.0, *) {
+                UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 0
+            }
+            personSegmentedControl = UISegmentedControl(items: CPEDataUtils.personJobFunctions?.map({ CPEDataUtils.titleForPeople(with: $0).uppercased() }))
+            personSegmentedControl?.frame = CGRect(x: Constants.SegmentedControlPadding, y: 0, width: tableView.frame.width - (Constants.SegmentedControlPadding * 2), height: Constants.SegmentedControlHeight)
+            personSegmentedControl?.tintColor = UIColor(netHex: 0xd61414)
+            personSegmentedControl?.setTitleTextAttributes([
+                NSFontAttributeName: UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
+                NSForegroundColorAttributeName: UIColor.white
+            ], for: .normal)
+            personSegmentedControl?.setTitleTextAttributes([
+                NSForegroundColorAttributeName: UIColor.white
+                ], for: .selected)
             personSegmentedControl?.selectedSegmentIndex = 0
             personSegmentedControl?.addTarget(self, action: #selector(onSelectPersonJobFunction), for: .valueChanged)
             

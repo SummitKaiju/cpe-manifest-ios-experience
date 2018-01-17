@@ -28,14 +28,11 @@ struct CPEDataUtils {
     static func titleForPerson(with jobFunction: PersonJobFunction) -> String {
         let pluralTitle = titleForPeople(with: jobFunction)
         switch pluralTitle {
-        case String.localize("label.actors"):
-            return String.localize("label.actor")
-            
-        case String.localize("label.characters"):
-            return String.localize("label.character")
-            
-        default:
-            return pluralTitle
+        case String.localize("label.actors"):       return String.localize("label.actor")
+        case String.localize("label.characters"):   return String.localize("label.character")
+        case String.localize("label.heroes"):       return String.localize("label.hero")
+        case String.localize("label.avatars"):      return String.localize("label.avatar")
+        default:                                    return pluralTitle
         }
     }
 

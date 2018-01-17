@@ -13,6 +13,9 @@ class ExtrasViewController: ExtrasExperienceViewController {
         static let CollectionViewPadding: CGFloat = (DeviceType.IS_IPAD ? 15 : 10)
         static let CollectionViewItemAspectRatio: CGFloat = 318 / 224
         static let TableViewHeaderHeight: CGFloat = 35
+        static let SegmentedControlPadding: CGFloat = (DeviceType.IS_IPAD ? 10 : 5)
+        static let SegmentedControlFontSize: CGFloat = (DeviceType.IS_IPAD ? 10 : 9)
+        static let SegmentedControlHeight: CGFloat = 30
     }
 
     fileprivate struct SegueIdentifier {
@@ -165,9 +168,15 @@ extension ExtrasViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if CPEDataUtils.numPersonJobFunctions > 1 && talentTableHeaderView == nil {
             personSegmentedControl = UISegmentedControl(items: CPEDataUtils.personJobFunctions?.map({ CPEDataUtils.titleForPeople(with: $0).uppercased() }))
-            personSegmentedControl?.frame = CGRect(x: 10, y: 0, width: tableView.frame.width - 20, height: Constants.TableViewHeaderHeight - 10)
-            personSegmentedControl?.tintColor = .themePrimary
-            personSegmentedControl?.setTitleTextAttributes([NSFontAttributeName: UIFont.systemFont(ofSize: 10)], for: .normal)
+            personSegmentedControl?.frame = CGRect(x: Constants.SegmentedControlPadding, y: 0, width: tableView.frame.width - (Constants.SegmentedControlPadding * 2), height: Constants.SegmentedControlHeight)
+            personSegmentedControl?.tintColor = UIColor(netHex: 0xd61414)
+            personSegmentedControl?.setTitleTextAttributes([
+                NSFontAttributeName: UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
+                NSForegroundColorAttributeName: UIColor.white
+                ], for: .normal)
+            personSegmentedControl?.setTitleTextAttributes([
+                NSForegroundColorAttributeName: UIColor.white
+                ], for: .selected)
             personSegmentedControl?.selectedSegmentIndex = 0
             personSegmentedControl?.addTarget(self, action: #selector(onSelectPersonJobFunction), for: .valueChanged)
             
