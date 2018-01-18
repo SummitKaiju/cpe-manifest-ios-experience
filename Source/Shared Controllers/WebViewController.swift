@@ -23,17 +23,7 @@ open class WebViewController: UIViewController {
     private var webView: WKWebView!
     public var hud: MBProgressHUD?
     public var shouldDisplayFullScreen = true
-    public var supportsPortrait = false
-    public var supportsLandscape = true
     
-    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        if supportsPortrait && supportsLandscape {
-            return .all
-        }
-        
-        return (supportsPortrait ? .portrait : .landscape)
-    }
-
     // MARK: Initialization
     convenience public init(url: URL, title: String? = nil) {
         self.init()
@@ -53,16 +43,6 @@ open class WebViewController: UIViewController {
                 self.url = newUrl
             }
         }
-    }
-    
-    convenience public init?(experienceApp: ExperienceApp) {
-        guard let url = experienceApp.url else {
-            return nil
-        }
-        
-        self.init(url: url, title: experienceApp.title)
-        supportsPortrait = experienceApp.supportsPortrait
-        supportsLandscape = experienceApp.supportsLandscape
     }
 
     // MARK: View Lifecycle
