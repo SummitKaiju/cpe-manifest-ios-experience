@@ -294,11 +294,8 @@ extension ExtrasViewController: UICollectionViewDelegate {
             self.performSegue(withIdentifier: SegueIdentifier.ShowMap, sender: experience)
             Analytics.log(event: .extrasAction, action: .selectSceneLocations)
         } else if experience.isType(.app) {
-            if let app = experience.app, let url = app.url {
-                let webViewController = WebViewController(url: url, title: app.title)
-                webViewController.shouldDisplayFullScreen = true
-                let navigationController = LandscapeNavigationController(rootViewController: webViewController)
-                self.present(navigationController, animated: true, completion: nil)
+            if let app = experience.app, let webViewController = WebViewController(experienceApp: app) {
+                self.present(webViewController, animated: true, completion: nil)
                 Analytics.log(event: .extrasAction, action: .selectApp, itemId: app.analyticsID)
             }
         } else {

@@ -203,11 +203,9 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? SceneDetailCollectionViewCell, let timedEvent = cell.timedEvent {
             if timedEvent.isType(.appGroup) {
-                if let experienceApp = timedEvent.experience?.app, let url = experienceApp.url {
+                if let experienceApp = timedEvent.experience?.app, let webViewController = WebViewController(experienceApp: experienceApp) {
                     NotificationCenter.default.post(name: .videoPlayerShouldPause, object: nil)
-                    let webViewController = WebViewController(url: url, title: experienceApp.title)
-                    let navigationController = LandscapeNavigationController(rootViewController: webViewController)
-                    self.present(navigationController, animated: true, completion: nil)
+                    self.present(webViewController, animated: true, completion: nil)
                     Analytics.log(event: .imeExtrasAction, action: .selectApp, itemId: experienceApp.analyticsID)
                 }
             } else {

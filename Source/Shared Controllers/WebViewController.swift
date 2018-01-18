@@ -5,6 +5,7 @@
 import UIKit
 import WebKit
 import MBProgressHUD
+import CPEData
 
 open class WebViewController: UIViewController {
 
@@ -21,28 +22,47 @@ open class WebViewController: UIViewController {
     private var url: URL!
     private var webView: WKWebView!
     public var hud: MBProgressHUD?
-    public var shouldDisplayFullScreen = false
+    public var shouldDisplayFullScreen = true
+    public var supportsPortrait = false
+    public var supportsLandscape = true
+    
+    override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if supportsPortrait && supportsLandscape {
+            return .all
+        }
+        
+        return (supportsPortrait ? .portrait : .landscape)
+    }
 
     // MARK: Initialization
     convenience public init(url: URL, title: String? = nil) {
         self.init()
-
-        var webViewUrl = url
+        
+        self.url = url
+        self.title = title
+        
         if var components = URLComponents(url: url, resolvingAgainstBaseURL: true), let deviceIdentifier = DeviceType.identifier {
-            let deviceModelParam = "iphoneModel=" + deviceIdentifier
+            let deviceModelParam = "iphoneModel=\(deviceIdentifier)"
             if let query = components.query {
-                components.query = query + "&" + deviceModelParam
+                components.query = "\(query)&\(deviceModelParam)"
             } else {
                 components.query = deviceModelParam
             }
 
             if let newUrl = components.url {
-                webViewUrl = newUrl
+                self.url = newUrl
             }
         }
-
-        self.title = title
-        self.url = webViewUrl
+    }
+    
+    convenience public init?(experienceApp: ExperienceApp) {
+        guard let url = experienceApp.url else {
+            return nil
+        }
+        
+        self.init(url: url, title: experienceApp.title)
+        supportsPortrait = experienceApp.supportsPortrait
+        supportsLandscape = experienceApp.supportsLandscape
     }
 
     // MARK: View Lifecycle
@@ -71,14 +91,11 @@ open class WebViewController: UIViewController {
                 let date = Date(timeIntervalSince1970: 0)
                 WKWebsiteDataStore.default().removeData(ofTypes: websiteDataTypes, modifiedSince: date, completionHandler: { })
             }
-        } else {
-            var libraryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, false).first!
-            libraryPath += "/Cookies"
-
+        } else if let libraryPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.libraryDirectory, FileManager.SearchPathDomainMask.userDomainMask, false).first {
             do {
-                try FileManager.default.removeItem(atPath: libraryPath)
+                try FileManager.default.removeItem(atPath: "\(libraryPath)/Cookies")
             } catch {
-                print("error")
+                print("Error clearing cookies folder")
             }
 
             URLCache.shared.removeAllCachedResponses()
