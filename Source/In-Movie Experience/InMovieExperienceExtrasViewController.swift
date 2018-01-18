@@ -173,7 +173,7 @@ extension InMovieExperienceExtrasViewController: UITableViewDataSource {
                 talentTableViewHeaderLabel?.text = CPEDataUtils.titleForPeople().uppercased()
             }
             
-            return talentTableHeaderView
+            return talentTableViewHeaderLabel
         }
         
         if talentTableHeaderView == nil {
