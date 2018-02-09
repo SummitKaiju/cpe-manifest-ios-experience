@@ -20,7 +20,6 @@ class ExtrasExperienceListViewController: ExtrasExperienceViewController {
         static let ShowMap = "ExtrasMapSegue"
         static let ShowShopping = "ExtrasShoppingSegue"
         static let ShowList = "ExtrasListSegue"
-        static let ShowTalentSelector = "TalentSelectorSegueIdentifier"
     }
 
     @IBOutlet var extrasCollectionView: UICollectionView!
@@ -50,8 +49,9 @@ class ExtrasExperienceListViewController: ExtrasExperienceViewController {
         } else if experience.isType(.app) {
             if let app = experience.app, let url = app.url {
                 let webViewController = WebViewController(url: url, title: app.title)
-                webViewController.shouldDisplayFullScreen = true
-                let navigationController = LandscapeNavigationController(rootViewController: webViewController)
+                let navigationController = CPENavigationController(rootViewController: webViewController)
+                navigationController.supportsPortrait = app.supportsPortrait
+                navigationController.supportsLandscape = app.supportsLandscape
                 self.present(navigationController, animated: true, completion: nil)
                 Analytics.log(event: .extrasAction, action: .selectApp, itemId: app.analyticsID)
             }

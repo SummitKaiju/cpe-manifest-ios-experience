@@ -10,6 +10,9 @@ class InMovieExperienceExtrasViewController: UIViewController {
     fileprivate struct Constants {
         static let HeaderHeight: CGFloat = 35
         static let FooterHeight: CGFloat = 45
+        static let SegmentedControlPadding: CGFloat = (DeviceType.IS_IPAD ? 10 : 5)
+        static let SegmentedControlFontSize: CGFloat = (DeviceType.IS_IPAD ? 10 : 9)
+        static let SegmentedControlHeight: CGFloat = 30
     }
 
     fileprivate struct SegueIdentifier {
@@ -22,10 +25,16 @@ class InMovieExperienceExtrasViewController: UIViewController {
     @IBOutlet weak private var showLessButton: UIButton!
     @IBOutlet weak private var showLessGradientView: UIView!
     private var showLessGradient = CAGradientLayer()
-    fileprivate var currentTalents: [Person]?
-    private var hiddenTalents: [Person]?
     fileprivate var isShowingMore = false
+    
+    fileprivate var talentTableHeaderView: UIView?
     fileprivate var talentTableViewHeaderLabel: UILabel?
+    fileprivate var personSegmentedControl: UISegmentedControl?
+    private var currentPersonJobFunction = PersonJobFunction.actor
+    fileprivate var currentPeople: [Person]?
+    fileprivate var allPeople: [Person]? {
+        return CPEDataUtils.people?[currentPersonJobFunction]
+    }
 
     private var currentTime: Double = -1
     private var didChangeTimeObserver: NSObjectProtocol?
@@ -49,9 +58,12 @@ class InMovieExperienceExtrasViewController: UIViewController {
                 backgroundImageView.contentMode = nodeStyle.backgroundScaleMethod == .bestFit ? .scaleAspectFill : .scaleAspectFit
             }
         }
-
-        if CPEDataUtils.hasPeopleForDisplay {
+        
+        if let people = CPEDataUtils.people {
             talentTableView?.register(UINib(nibName: TalentTableViewCell.NibNameNarrow + (DeviceType.IS_IPAD ? "" : "_iPhone"), bundle: Bundle.frameworkResources), forCellReuseIdentifier: TalentTableViewCell.ReuseIdentifier)
+            if people[.actor] == nil {
+                currentPersonJobFunction = people.first!.0
+            }
         } else {
             talentTableView?.removeFromSuperview()
             talentTableView = nil
@@ -59,7 +71,6 @@ class InMovieExperienceExtrasViewController: UIViewController {
 
         showLessGradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
         showLessGradientView.layer.insertSublayer(showLessGradient, at: 0)
-
         showLessButton.setTitle(String.localize("talent.show_less"), for: .normal)
 
         didChangeTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: nil) { [weak self] (notification) -> Void in
@@ -84,20 +95,11 @@ class InMovieExperienceExtrasViewController: UIViewController {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.currentTime = time
 
-                let newTalents = CPEXMLSuite.current!.manifest.timedEvents(atTimecode: time, type: .person)?.sorted(by: {
-                    return $0.person!.billingBlockOrder < $1.person!.billingBlockOrder
-                }).map({
-                    $0.person!
-                })
-
-                if self.isShowingMore {
-                    self.hiddenTalents = newTalents
-                } else {
-                    if self.currentTalents == nil || newTalents == nil || newTalents!.count != self.currentTalents!.count || newTalents!.contains(where: { !self.currentTalents!.contains($0) }) {
-                        DispatchQueue.main.async {
-                            self.currentTalents = newTalents
-                            self.talentTableView?.reloadData()
-                        }
+                let newPeople = CPEXMLSuite.current!.manifest.timedEvents(atTimecode: time, type: .person)?.flatMap({ ($0.person?.jobFunction == self.currentPersonJobFunction ? $0.person : nil) }).sorted()
+                if self.currentPeople == nil || newPeople == nil || newPeople!.contains(where: { !self.currentPeople!.contains($0) }) || self.currentPeople!.contains(where: { !newPeople!.contains($0) }) {
+                    DispatchQueue.main.async {
+                        self.currentPeople = newPeople
+                        self.talentTableView?.reloadData()
                     }
                 }
             }
@@ -116,24 +118,23 @@ class InMovieExperienceExtrasViewController: UIViewController {
     private func toggleShowMore() {
         isShowingMore = !isShowingMore
         showLessContainer.isHidden = !isShowingMore
-
-        if isShowingMore {
-            hiddenTalents = currentTalents
-            currentTalents = CPEDataUtils.peopleForDisplay
-            Analytics.log(event: .imeTalentAction, action: .showMore)
-        } else {
-            currentTalents = hiddenTalents
-            Analytics.log(event: .imeTalentAction, action: .showLess)
-        }
-
-        talentTableView?.contentOffset = CGPoint.zero
+        Analytics.log(event: .imeTalentAction, action: (isShowingMore ? .showMore : .showLess))
+        talentTableView?.contentOffset = .zero
         talentTableView?.reloadData()
+    }
+    
+    @objc fileprivate func onSelectPersonJobFunction() {
+        if let index = personSegmentedControl?.selectedSegmentIndex, let jobFunctions = CPEDataUtils.personJobFunctions, jobFunctions.count > index {
+            currentPersonJobFunction = Array(jobFunctions)[index]
+            processTimedEvents(currentTime)
+            talentTableView?.reloadData()
+        }
     }
 
     // MARK: Storyboard Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueIdentifier.ShowTalent, let talentDetailViewController = (segue.destination as? TalentDetailViewController), let talent = (sender as? Person) {
-            talentDetailViewController.title = CPEDataUtils.personExperienceName
+            talentDetailViewController.title = CPEDataUtils.titleForPerson(with: currentPersonJobFunction)
             talentDetailViewController.talent = talent
             talentDetailViewController.mode = TalentDetailMode.Synced
         }
@@ -144,7 +145,7 @@ class InMovieExperienceExtrasViewController: UIViewController {
 extension InMovieExperienceExtrasViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (currentTalents?.count ?? 0)
+        return ((isShowingMore ? allPeople : currentPeople)?.count ?? 0)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -153,25 +154,50 @@ extension InMovieExperienceExtrasViewController: UITableViewDataSource {
             return tableViewCell
         }
 
-        if let talents = currentTalents, talents.count > indexPath.row {
-            cell.talent = talents[indexPath.row]
+        if let people = (isShowingMore ? allPeople : currentPeople), people.count > indexPath.row {
+            cell.talent = people[indexPath.row]
         }
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if talentTableViewHeaderLabel == nil {
-            talentTableViewHeaderLabel = UILabel(frame: CGRect(x: 5, y: 0, width: tableView.bounds.width - 10, height: Constants.HeaderHeight))
-            talentTableViewHeaderLabel?.textAlignment = .center
-            talentTableViewHeaderLabel?.textColor = UIColor(netHex: 0xe5e5e5)
-            talentTableViewHeaderLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 19 : 17)
-            talentTableViewHeaderLabel?.adjustsFontSizeToFitWidth = true
-            talentTableViewHeaderLabel?.minimumScaleFactor = 0.65
-            talentTableViewHeaderLabel?.text = CPEDataUtils.peopleExperienceName.uppercased()
+        if CPEDataUtils.numPersonJobFunctions <= 1 {
+            if talentTableViewHeaderLabel == nil {
+                talentTableViewHeaderLabel = UILabel(frame: CGRect(x: 5, y: 0, width: tableView.bounds.width - 10, height: Constants.HeaderHeight))
+                talentTableViewHeaderLabel?.textAlignment = .center
+                talentTableViewHeaderLabel?.textColor = UIColor(netHex: 0xe5e5e5)
+                talentTableViewHeaderLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 19 : 17)
+                talentTableViewHeaderLabel?.adjustsFontSizeToFitWidth = true
+                talentTableViewHeaderLabel?.minimumScaleFactor = 0.65
+                talentTableViewHeaderLabel?.text = CPEDataUtils.titleForPeople().uppercased()
+            }
+            
+            return talentTableViewHeaderLabel
         }
-
-        return talentTableViewHeaderLabel
+        
+        if talentTableHeaderView == nil {
+            if #available(iOS 9.0, *) {
+                UILabel.appearance(whenContainedInInstancesOf: [UISegmentedControl.self]).numberOfLines = 0
+            }
+            personSegmentedControl = UISegmentedControl(items: CPEDataUtils.personJobFunctions?.map({ CPEDataUtils.titleForPeople(with: $0).uppercased() }))
+            personSegmentedControl?.frame = CGRect(x: Constants.SegmentedControlPadding, y: 0, width: tableView.frame.width - (Constants.SegmentedControlPadding * 2), height: Constants.SegmentedControlHeight)
+            personSegmentedControl?.tintColor = UIColor(netHex: 0xd61414)
+            personSegmentedControl?.setTitleTextAttributes([
+                NSFontAttributeName: UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
+                NSForegroundColorAttributeName: UIColor.white
+            ], for: .normal)
+            personSegmentedControl?.setTitleTextAttributes([
+                NSForegroundColorAttributeName: UIColor.white
+                ], for: .selected)
+            personSegmentedControl?.selectedSegmentIndex = 0
+            personSegmentedControl?.addTarget(self, action: #selector(onSelectPersonJobFunction), for: .valueChanged)
+            
+            talentTableHeaderView = UIView()
+            talentTableHeaderView?.addSubview(personSegmentedControl!)
+        }
+        
+        return talentTableHeaderView
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

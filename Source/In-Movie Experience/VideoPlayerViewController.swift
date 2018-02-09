@@ -1039,6 +1039,8 @@ class VideoPlayerViewController: UIViewController {
                     if state != .videoPlaying {
                         state = .readyToPlay
                         NotificationCenter.default.post(name: .videoPlayerItemReadyToPlayer, object: nil)
+                    } else if !isCastingActive {
+                        initScrubberTimer()
                     }
                     break
 

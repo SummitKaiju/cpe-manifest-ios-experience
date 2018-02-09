@@ -43,6 +43,10 @@
 "label.actor" = "Actor";
 "label.characters" = "Characters";
 "label.character" = "Character";
+"label.heroes" = "Heroes";
+"label.hero" = "Hero";
+"label.avatars" = "Avatars";
+"label.avatar" = "Avatar";
 
 // Info text
 "info.leaving_app.title" = "Leaving App";
