@@ -64,7 +64,7 @@ class TalentDetailViewController: SceneDetailViewController {
         super.viewDidLoad()
 
         // Localizations
-        talentBiographyHeaderLabel?.text = String.localize("talentdetail.biography").uppercased()
+        talentBiographyHeaderLabel?.text = (talent.biographyHeader ?? String.localize("talentdetail.biography")).uppercased()
         galleryHeaderLabel?.text = String.localize("talentdetail.gallery").uppercased()
         filmographyHeaderLabel?.text = String.localize("talentdetail.filmography").uppercased()
 
