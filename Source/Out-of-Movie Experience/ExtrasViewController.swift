@@ -258,7 +258,7 @@ extension ExtrasViewController: UICollectionViewDataSource {
                 return cell
             }
 
-            childExperienceIndex -= 1
+            childExperienceIndex -= CPEDataUtils.numPersonJobFunctions
         }
 
         cell.experience = experience.childExperience(atIndex: childExperienceIndex)
@@ -278,7 +278,7 @@ extension ExtrasViewController: UICollectionViewDelegate {
                 return
             }
 
-            childExperienceIndex -= 1
+            childExperienceIndex -= CPEDataUtils.numPersonJobFunctions
         }
 
         if let experience = experience.childExperience(atIndex: childExperienceIndex) {
