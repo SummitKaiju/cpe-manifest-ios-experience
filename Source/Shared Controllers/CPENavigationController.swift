@@ -8,6 +8,7 @@ class CPENavigationController: UINavigationController {
     
     public var supportsPortrait = false
     public var supportsLandscape = true
+    private weak var lastPresentedController : UIViewController?
     
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if supportsPortrait && supportsLandscape {
@@ -27,6 +28,24 @@ class CPENavigationController: UINavigationController {
     
     override open var shouldAutorotate: Bool {
         return true
+    }
+    
+    /* Resolution to issue where WKActionSheet (save image, copy, cancel on long press)
+     * causes presenting view controller to be dismissed.
+     * @see : https://stackoverflow.com/questions/49856616/wkwebview-action-sheet-dismisses-the-presenting-view-controller-after-being-dism
+     */
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        // WKWebView actions sheets workaround
+        if presentedViewController != nil && lastPresentedController != presentedViewController  {
+            lastPresentedController = presentedViewController;
+            presentedViewController?.dismiss(animated: flag, completion: {
+                completion?();
+                self.lastPresentedController = nil;
+            });
+            
+        } else if( nil == lastPresentedController) {
+            super.dismiss(animated: flag, completion: completion);
+        }
     }
 
 }
