@@ -29,6 +29,7 @@
 		49A802369A07722BDEC28F07 /* Pods-CPEExperienceExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPEExperienceExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample.debug.xcconfig"; sourceTree = "<group>"; };
 		49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		49F502541C890E6500DFAD88 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		58F1D09C210205470093AF8D /* AetherPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AetherPlayer.framework; path = Frameworks/AetherPlayer.framework; sourceTree = "<group>"; };
 		7084E1E41D0F18EE00B1B5B7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = CPEExperienceExample/Info.plist; sourceTree = SOURCE_ROOT; };
 		70BB990E1E415DE7008D9027 /* ExamplePlaybackAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplePlaybackAsset.swift; sourceTree = "<group>"; };
 		70C092A41D0F52E100BFC1E4 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMaps.framework; path = ../Dependencies/GoogleMaps.framework; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				58F1D09C210205470093AF8D /* AetherPlayer.framework */,
 				70F2FE4B1E8C3560006F8A12 /* GoogleMaps.bundle */,
 				70C092A41D0F52E100BFC1E4 /* GoogleMaps.framework */,
 				495CF3691CC042BA006AE290 /* CoreText.framework */,
@@ -221,6 +223,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CPEData/CPEData.framework",
+				"${PODS_ROOT}/../../Frameworks/AetherPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/CPEExperience/CPEExperience.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
@@ -232,6 +235,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CPEData.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AetherPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CPEExperience.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
