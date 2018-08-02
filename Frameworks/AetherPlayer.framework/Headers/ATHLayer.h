@@ -15,6 +15,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+@class ATHContent;
+
 typedef NS_ENUM(NSInteger, ATHLayerType) {
     ATHLayerTypeImage,
     ATHLayerTypeVideo,
@@ -38,7 +40,9 @@ typedef NS_ENUM(NSInteger, ATHLayerTransparency) {
 @property (nonatomic, strong, nullable) ATHPosition *position;
 @property (nonatomic, strong, nullable) ATHHoverState *hover;
 @property (nonatomic, strong, nullable) ATHActiveState *active;
-+ (nullable instancetype)layerFromDictionary:(NSDictionary * _Nullable)dictionary;
+@property (nonatomic, assign) BOOL autoplay;
+
++ (nullable instancetype)layerFromDictionary:(NSDictionary * _Nullable)dictionary andContentResolver:(ATHContent *(^__nullable)(id))contentResolver;
 
 @property (nonatomic, strong, nullable) AVPlayer *player;
 @property (nonatomic, strong, nullable) AVPlayer *maskPlayer;

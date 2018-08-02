@@ -12,6 +12,7 @@
 - (void)didBeginSeekingTo:(CGFloat)percentage;
 - (void)didSeekTo:(CGFloat)percentage;
 - (void)didEndSeekingTo:(CGFloat)percentage;
+- (void)didSkipTo:(CGFloat)percentage;
 @end
 
 @interface ATHControlsView : UIView <UIGestureRecognizerDelegate>

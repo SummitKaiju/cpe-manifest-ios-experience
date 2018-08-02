@@ -20,13 +20,16 @@ typedef NS_ENUM(NSInteger, ATHContentType) {
 @interface ATHContent : NSObject
 @property (nonatomic, assign) ATHContentType type;
 @property (nonatomic, strong, nullable) NSURL *url;
+@property (nonatomic, strong, nullable) NSURL *audio;
 @property (nonatomic, strong, nullable) NSArray<ATHLayer *> *layers;
 @property (nonatomic, strong, nullable) NSArray<ATHCallout *> *callouts;
 @property (nonatomic, strong, nullable) ATHInitialView *initialView;
 @property (nonatomic, assign) BOOL sync;
 @property (nonatomic, assign) BOOL looping;
 @property (nonatomic, assign) float anchor;
-+ (nullable instancetype)contentFromDictionary:(NSDictionary * _Nullable)dictionary;
+
+@property (nonatomic, assign) BOOL initalSceneLoad;
++ (nullable instancetype)contentFromDictionary:(NSDictionary * _Nullable)dictionary andContentResolver:(ATHContent *(^__nullable)(id))contentResolver;
 + (nullable instancetype)contentFromIMF:(NSData * _Nullable)imf;
 + (nullable instancetype)contentFromURL:(NSURL * _Nullable)url;
 

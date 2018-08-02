@@ -57,6 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)playbackStartedAt:(CMTime)time withDuration:(CMTime)duration;
 - (void)playbackMovedTo:(CMTime)time withDuration:(CMTime)duration;
 - (void)playbackStoppedAt:(CMTime)time withDuration:(CMTime)duration;
+- (void)periodicObserverHandler:(CMTime)time withDuration:(CMTime)duration;
 - (void)playbackDidReachEnd;
 - (void)childWillPopAt:(double)time withContent:(ATHContent *)content;
 
