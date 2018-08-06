@@ -11,6 +11,9 @@
 
 @interface ATH360ContentViewController : ATHContentViewController <ATHRendererViewDelegate>
 @property (nonatomic, assign) BOOL isEmbedded;
+@property (nonatomic, assign) BOOL userCardboardPreference; //Initial vr user preference, should view start in cardboard mode
+
 @property (nonatomic, readonly, strong) UIView *previewView;
+
 - (NSArray<ATHRenderer *> *)getRenderersStartingFrom:(int)zIndex;
 @end
