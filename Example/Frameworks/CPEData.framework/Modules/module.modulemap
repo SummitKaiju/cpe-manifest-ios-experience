@@ -1,0 +1,11 @@
+framework module CPEData {
+  umbrella header "CPEData.h"
+
+  export *
+  module * { export * }
+}
+
+module CPEData.Swift {
+    header "CPEData-Swift.h"
+    requires objc
+}

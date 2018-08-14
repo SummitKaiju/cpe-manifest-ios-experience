@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1D46153C211588A800E2BFA1 /* GoogleMapsM4B.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461531211588A800E2BFA1 /* GoogleMapsM4B.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D46153D211588A800E2BFA1 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461532211588A800E2BFA1 /* Reachability.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		1D46153E211588A800E2BFA1 /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461533211588A800E2BFA1 /* GoogleCast.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D46153F211588A800E2BFA1 /* UAProgressView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461534211588A800E2BFA1 /* UAProgressView.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D461540211588A800E2BFA1 /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461535211588A800E2BFA1 /* SDWebImage.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1D461541211588A800E2BFA1 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461536211588A800E2BFA1 /* GoogleMapsBase.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -56,7 +55,6 @@
 		1D513432211569B4000DA314 /* SettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5133CD211569B4000DA314 /* SettingsManager.swift */; };
 		1D513433211569B4000DA314 /* MenuSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5133CF211569B4000DA314 /* MenuSection.swift */; };
 		1D513434211569B4000DA314 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5133D0211569B4000DA314 /* MenuItem.swift */; };
-		1D513435211569B4000DA314 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5133D1211569B4000DA314 /* HomeViewController.swift */; };
 		1D513436211569B4000DA314 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D5133D2211569B4000DA314 /* Main_iPhone.storyboard */; };
 		1D513437211569B4000DA314 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D5133D4211569B4000DA314 /* Main_iPad.storyboard */; };
 		1D513438211569B4000DA314 /* CPEManifestExperience.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1D5133D6211569B4000DA314 /* CPEManifestExperience.strings */; };
@@ -110,6 +108,8 @@
 		1D513468211569B4000DA314 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51340C211569B4000DA314 /* DropdownTableViewCell.swift */; };
 		1D513469211569B4000DA314 /* TitledImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51340D211569B4000DA314 /* TitledImageCell.swift */; };
 		1D51346A211569B4000DA314 /* SimpleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51340E211569B4000DA314 /* SimpleImageCollectionViewCell.swift */; };
+		1D890199212290730098F4F2 /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461533211588A800E2BFA1 /* GoogleCast.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		1DD783D12122C67600B321CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5133D1211569B4000DA314 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -227,7 +227,6 @@
 			files = (
 				1D46153C211588A800E2BFA1 /* GoogleMapsM4B.framework in Frameworks */,
 				1D46153D211588A800E2BFA1 /* Reachability.framework in Frameworks */,
-				1D46153E211588A800E2BFA1 /* GoogleCast.framework in Frameworks */,
 				1D46153F211588A800E2BFA1 /* UAProgressView.framework in Frameworks */,
 				1D461540211588A800E2BFA1 /* SDWebImage.framework in Frameworks */,
 				1D461541211588A800E2BFA1 /* GoogleMapsBase.framework in Frameworks */,
@@ -236,6 +235,7 @@
 				1D461544211588A800E2BFA1 /* MBProgressHUD.framework in Frameworks */,
 				1D461545211588A800E2BFA1 /* GoogleMaps.framework in Frameworks */,
 				1D461546211588A800E2BFA1 /* SWXMLHash.framework in Frameworks */,
+				1D890199212290730098F4F2 /* GoogleCast.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +579,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/*.framework",
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/",
@@ -618,7 +617,6 @@
 				1D51345C211569B4000DA314 /* TalentDetailViewController.swift in Sources */,
 				1D513422211569B4000DA314 /* ExtrasShoppingItemsViewController.swift in Sources */,
 				1D51346A211569B4000DA314 /* SimpleImageCollectionViewCell.swift in Sources */,
-				1D513435211569B4000DA314 /* HomeViewController.swift in Sources */,
 				1D513459211569B4000DA314 /* WebViewController.swift in Sources */,
 				1D513463211569B4000DA314 /* MapItemCell.swift in Sources */,
 				1D51343F211569B4000DA314 /* TextSceneDetailCollectionViewCell.swift in Sources */,
@@ -628,6 +626,7 @@
 				1D513445211569B4000DA314 /* ShoppingSceneDetailCollectionViewCell.swift in Sources */,
 				1D513426211569B4000DA314 /* ExtrasSceneLocationsViewController.swift in Sources */,
 				1D513421211569B4000DA314 /* ExtrasExperienceListViewController.swift in Sources */,
+				1DD783D12122C67600B321CC /* HomeViewController.swift in Sources */,
 				1D513454211569B4000DA314 /* TimeIntervalUtils.swift in Sources */,
 				1D513425211569B4000DA314 /* ExtrasShoppingViewController.swift in Sources */,
 				1D513460211569B4000DA314 /* SocialButton.swift in Sources */,
