@@ -3,5 +3,5 @@ github "matej/MBProgressHUD" ~> 0.9
 github "rs/SDWebImage" ~> 4.0
 github "ImranSaadi/UAProgressView" ~> 0.1.4.1
 github "leoneparise/GoogleMaps-Carthage"
-github "ashleymills/Reachability.swift" ~> 3.0
+github "ashleymills/Reachability.swift" ~> 4.1.0
 binary "Dependencies/GoogleCast.json" ~> 4.3.1

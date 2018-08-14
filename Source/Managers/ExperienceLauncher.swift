@@ -16,7 +16,7 @@ open  class ExperienceLauncher {
 
     open static func launch(fromViewController viewController: UIViewController) {
         SDWebImageCodersManager.sharedInstance().coders = [SimpleImageIOCoder.shared()]
-        reachabilityChangedObserver = NotificationCenter.default.addObserver(forName: ReachabilityChangedNotification, object: reachability, queue: OperationQueue.main) { (notification) in
+        reachabilityChangedObserver = NotificationCenter.default.addObserver(forName: Notification.Name.reachabilityChanged, object: reachability, queue: OperationQueue.main) { (notification) in
             if let reachability = notification.object as? Reachability {
                 if reachability.isReachable {
                     if reachability.isReachableViaWiFi {
