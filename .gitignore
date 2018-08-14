@@ -29,3 +29,7 @@ xcuserdata
 
 ## CocoaPods
 Pods
+
+## Carthage
+Carthage/Carthage/Build
+Carthage/Carthage/Checkouts
