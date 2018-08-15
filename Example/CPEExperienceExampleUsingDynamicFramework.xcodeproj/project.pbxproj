@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D608F8B2123E4A900D397AD /* CPEExperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; };
+		1D608F8C2123E4A900D397AD /* CPEExperience.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D8901C32122A05A0098F4F2 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901C12122A03B0098F4F2 /* config.json */; };
 		1D8901C42122A0D80098F4F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901B921229FF80098F4F2 /* LaunchScreen.storyboard */; };
 		1D8901C52122A0DB0098F4F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901BA21229FF80098F4F2 /* Main.storyboard */; };
@@ -35,8 +37,6 @@
 		1DD783C62122A99100B321CC /* UAProgressView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD7838A2122A6F800B321CC /* UAProgressView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1DD783C72122A99100B321CC /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD783802122A28C00B321CC /* GoogleCast.framework */; };
 		1DD783C82122A99100B321CC /* GoogleCast.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD783802122A28C00B321CC /* GoogleCast.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1DD783CD2122AAA000B321CC /* CPEExperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD7837E2122A24100B321CC /* CPEExperience.framework */; };
-		1DD783CE2122AAA000B321CC /* CPEExperience.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD7837E2122A24100B321CC /* CPEExperience.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,7 +49,7 @@
 				1DD783C62122A99100B321CC /* UAProgressView.framework in Embed Frameworks */,
 				1DD783C22122A99100B321CC /* SDWebImage.framework in Embed Frameworks */,
 				1DD783C82122A99100B321CC /* GoogleCast.framework in Embed Frameworks */,
-				1DD783CE2122AAA000B321CC /* CPEExperience.framework in Embed Frameworks */,
+				1D608F8C2123E4A900D397AD /* CPEExperience.framework in Embed Frameworks */,
 				1DD783B82122A99100B321CC /* GoogleMapsBase.framework in Embed Frameworks */,
 				1DD783B62122A99100B321CC /* GoogleMaps.framework in Embed Frameworks */,
 				1DD783BE2122A99100B321CC /* MBProgressHUD.framework in Embed Frameworks */,
@@ -65,6 +65,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D608F8A2123E4A900D397AD /* CPEExperience.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CPEExperience.framework; sourceTree = "<group>"; };
 		1D8901A321229FAC0098F4F2 /* CPEExperienceExampleUsingDynamicFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPEExperienceExampleUsingDynamicFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D8901B921229FF80098F4F2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D8901BA21229FF80098F4F2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -74,7 +75,6 @@
 		1D8901BE21229FF80098F4F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1D8901C12122A03B0098F4F2 /* config.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		1D8901C22122A03B0098F4F2 /* config.json.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.json.example; sourceTree = "<group>"; };
-		1DD7837E2122A24100B321CC /* CPEExperience.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CPEExperience.framework; sourceTree = "<group>"; };
 		1DD783802122A28C00B321CC /* GoogleCast.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleCast.framework; sourceTree = "<group>"; };
 		1DD783822122A6F800B321CC /* CPEData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CPEData.framework; sourceTree = "<group>"; };
 		1DD783832122A6F800B321CC /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 				1DD783C52122A99100B321CC /* UAProgressView.framework in Frameworks */,
 				1DD783C12122A99100B321CC /* SDWebImage.framework in Frameworks */,
 				1DD783C72122A99100B321CC /* GoogleCast.framework in Frameworks */,
-				1DD783CD2122AAA000B321CC /* CPEExperience.framework in Frameworks */,
+				1D608F8B2123E4A900D397AD /* CPEExperience.framework in Frameworks */,
 				1DD783B72122A99100B321CC /* GoogleMapsBase.framework in Frameworks */,
 				1DD783B52122A99100B321CC /* GoogleMaps.framework in Frameworks */,
 				1DD783BD2122A99100B321CC /* MBProgressHUD.framework in Frameworks */,
@@ -162,6 +162,7 @@
 		1D8901C92122A1510098F4F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D608F8A2123E4A900D397AD /* CPEExperience.framework */,
 				1DD783822122A6F800B321CC /* CPEData.framework */,
 				1DD783872122A6F800B321CC /* GoogleMaps.framework */,
 				1DD7838B2122A6F800B321CC /* GoogleMapsBase.framework */,
@@ -173,7 +174,6 @@
 				1DD783892122A6F800B321CC /* SWXMLHash.framework */,
 				1DD7838A2122A6F800B321CC /* UAProgressView.framework */,
 				1DD783802122A28C00B321CC /* GoogleCast.framework */,
-				1DD7837E2122A24100B321CC /* CPEExperience.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -382,6 +382,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CE7D7D92E2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -403,6 +404,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CE7D7D92E2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
