@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1D608F8B2123E4A900D397AD /* CPEExperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; };
 		1D608F8C2123E4A900D397AD /* CPEExperience.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1D608F8E2123E69500D397AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8D2123E69500D397AD /* MessageUI.framework */; };
+		1D608F902123E69C00D397AD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8F2123E69C00D397AD /* CoreText.framework */; };
+		1D608F922123E6AC00D397AD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F912123E6AC00D397AD /* QuartzCore.framework */; };
+		1D608F942123E6BB00D397AD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F932123E6BB00D397AD /* MapKit.framework */; };
 		1D8901C32122A05A0098F4F2 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901C12122A03B0098F4F2 /* config.json */; };
 		1D8901C42122A0D80098F4F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901B921229FF80098F4F2 /* LaunchScreen.storyboard */; };
 		1D8901C52122A0DB0098F4F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901BA21229FF80098F4F2 /* Main.storyboard */; };
@@ -66,6 +70,10 @@
 
 /* Begin PBXFileReference section */
 		1D608F8A2123E4A900D397AD /* CPEExperience.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CPEExperience.framework; sourceTree = "<group>"; };
+		1D608F8D2123E69500D397AD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		1D608F8F2123E69C00D397AD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		1D608F912123E6AC00D397AD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1D608F932123E6BB00D397AD /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1D8901A321229FAC0098F4F2 /* CPEExperienceExampleUsingDynamicFramework.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPEExperienceExampleUsingDynamicFramework.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D8901B921229FF80098F4F2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D8901BA21229FF80098F4F2 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -93,6 +101,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D608F942123E6BB00D397AD /* MapKit.framework in Frameworks */,
+				1D608F922123E6AC00D397AD /* QuartzCore.framework in Frameworks */,
+				1D608F902123E69C00D397AD /* CoreText.framework in Frameworks */,
+				1D608F8E2123E69500D397AD /* MessageUI.framework in Frameworks */,
 				1DD783C52122A99100B321CC /* UAProgressView.framework in Frameworks */,
 				1DD783C12122A99100B321CC /* SDWebImage.framework in Frameworks */,
 				1DD783C72122A99100B321CC /* GoogleCast.framework in Frameworks */,
@@ -162,6 +174,10 @@
 		1D8901C92122A1510098F4F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D608F932123E6BB00D397AD /* MapKit.framework */,
+				1D608F912123E6AC00D397AD /* QuartzCore.framework */,
+				1D608F8F2123E69C00D397AD /* CoreText.framework */,
+				1D608F8D2123E69500D397AD /* MessageUI.framework */,
 				1D608F8A2123E4A900D397AD /* CPEExperience.framework */,
 				1DD783822122A6F800B321CC /* CPEData.framework */,
 				1DD783872122A6F800B321CC /* GoogleMaps.framework */,
@@ -382,7 +398,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CE7D7D92E2;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
@@ -404,7 +420,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CE7D7D92E2;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
