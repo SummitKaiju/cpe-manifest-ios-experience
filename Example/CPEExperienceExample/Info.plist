@@ -2,16 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone access will be used to listen for your Google Cast PIN</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Camera access will be used to allow you take photos for interactive experiences</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Bluetooth access will be used to search for nearby Google Cast devices</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo Library access will be used to allow you to save photos from interactive experiences</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Photo Library access will be used to allow you to save photos from interactive experiences</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -37,6 +27,16 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth access will be used to search for nearby Google Cast devices</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access will be used to allow you take photos for interactive experiences</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Microphone access will be used to listen for your Google Cast PIN</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Photo Library access will be used to allow you to save photos from interactive experiences</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library access will be used to allow you to save photos from interactive experiences</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
