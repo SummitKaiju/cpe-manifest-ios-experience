@@ -9,7 +9,7 @@ target 'CPEExperienceExample' do
     
     use_frameworks!
     
-    pod 'CPEData',          :path => '../../cpe-manifest-ios-data'
+    pod 'CPEData',          '~> 3.2'
     pod 'CPEExperience',    :path => '../'
 
 end
