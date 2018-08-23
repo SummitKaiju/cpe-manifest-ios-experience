@@ -1,7 +1,0 @@
-github "warnerbros/cpe-manifest-ios-data" ~> 3.2.0
-github "matej/MBProgressHUD" ~> 0.9
-github "rs/SDWebImage" ~> 4.0
-github "ImranSaadi/UAProgressView" ~> 0.1.4.2
-github "leoneparise/GoogleMaps-Carthage" ~> 2.4.0
-github "ashleymills/Reachability.swift" ~> 4.1.0
-binary "Dependencies/GoogleCast.json" ~> 4.3.1

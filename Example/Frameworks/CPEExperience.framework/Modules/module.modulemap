@@ -1,4 +1,0 @@
-framework module CPEExperience {
-    header "CPEExperience-Swift.h"
-    requires objc
-}

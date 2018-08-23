@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D608F8B2123E4A900D397AD /* CPEExperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; };
-		1D608F8C2123E4A900D397AD /* CPEExperience.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D608F8E2123E69500D397AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8D2123E69500D397AD /* MessageUI.framework */; };
 		1D608F902123E69C00D397AD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8F2123E69C00D397AD /* CoreText.framework */; };
 		1D608F922123E6AC00D397AD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F912123E6AC00D397AD /* QuartzCore.framework */; };
 		1D608F942123E6BB00D397AD /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F932123E6BB00D397AD /* MapKit.framework */; };
+		1D76DE98212E574200FE3087 /* CPEExperience.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; };
+		1D76DE99212E574200FE3087 /* CPEExperience.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8A2123E4A900D397AD /* CPEExperience.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D8901C32122A05A0098F4F2 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901C12122A03B0098F4F2 /* config.json */; };
 		1D8901C42122A0D80098F4F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901B921229FF80098F4F2 /* LaunchScreen.storyboard */; };
 		1D8901C52122A0DB0098F4F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D8901BA21229FF80098F4F2 /* Main.storyboard */; };
@@ -53,7 +53,7 @@
 				1DD783C62122A99100B321CC /* UAProgressView.framework in Embed Frameworks */,
 				1DD783C22122A99100B321CC /* SDWebImage.framework in Embed Frameworks */,
 				1DD783C82122A99100B321CC /* GoogleCast.framework in Embed Frameworks */,
-				1D608F8C2123E4A900D397AD /* CPEExperience.framework in Embed Frameworks */,
+				1D76DE99212E574200FE3087 /* CPEExperience.framework in Embed Frameworks */,
 				1DD783B82122A99100B321CC /* GoogleMapsBase.framework in Embed Frameworks */,
 				1DD783B62122A99100B321CC /* GoogleMaps.framework in Embed Frameworks */,
 				1DD783BE2122A99100B321CC /* MBProgressHUD.framework in Embed Frameworks */,
@@ -104,11 +104,11 @@
 				1D608F942123E6BB00D397AD /* MapKit.framework in Frameworks */,
 				1D608F922123E6AC00D397AD /* QuartzCore.framework in Frameworks */,
 				1D608F902123E69C00D397AD /* CoreText.framework in Frameworks */,
+				1D76DE98212E574200FE3087 /* CPEExperience.framework in Frameworks */,
 				1D608F8E2123E69500D397AD /* MessageUI.framework in Frameworks */,
 				1DD783C52122A99100B321CC /* UAProgressView.framework in Frameworks */,
 				1DD783C12122A99100B321CC /* SDWebImage.framework in Frameworks */,
 				1DD783C72122A99100B321CC /* GoogleCast.framework in Frameworks */,
-				1D608F8B2123E4A900D397AD /* CPEExperience.framework in Frameworks */,
 				1DD783B72122A99100B321CC /* GoogleMapsBase.framework in Frameworks */,
 				1DD783B52122A99100B321CC /* GoogleMaps.framework in Frameworks */,
 				1DD783BD2122A99100B321CC /* MBProgressHUD.framework in Frameworks */,
@@ -191,7 +191,8 @@
 				1DD7838A2122A6F800B321CC /* UAProgressView.framework */,
 				1DD783802122A28C00B321CC /* GoogleCast.framework */,
 			);
-			path = Frameworks;
+			name = Frameworks;
+			path = ../Carthage/Build/iOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -312,7 +313,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Frameworks/**";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -375,7 +376,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Frameworks/**";
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -398,10 +399,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CE7D7D92E2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
+					../Carthage/Build/iOS,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/CPEExperienceExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -420,10 +421,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = CE7D7D92E2;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Frameworks",
+					../Carthage/Build/iOS,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/CPEExperienceExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
