@@ -5,6 +5,8 @@
 import UIKit
 import CPEData
 
+import AetherPlayer
+
 class ExtrasViewController: ExtrasExperienceViewController {
 
     fileprivate struct Constants {
@@ -295,12 +297,21 @@ extension ExtrasViewController: UICollectionViewDelegate {
             Analytics.log(event: .extrasAction, action: .selectSceneLocations)
         } else if experience.isType(.app) {
             if let app = experience.app, let url = app.url {
-                let webViewController = WebViewController(url: url, title: app.title)
-                let navigationController = CPENavigationController(rootViewController: webViewController)
-                navigationController.supportsPortrait = app.supportsPortrait
-                navigationController.supportsLandscape = app.supportsLandscape
-                self.present(navigationController, animated: true, completion: nil)
-                Analytics.log(event: .extrasAction, action: .selectApp, itemId: app.analyticsID)
+                if app.appGroup?.interactiveTrackReferences.first?.interactives.first?.encodings.first?.runtimeEnvironment == InteractiveRuntimeEnvironment.ath {
+                    let content = AetherContentManager.shared.get(imfURL: url)
+                    let playerViewController = ATHPlayerViewController(content: content)
+                    playerViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve;
+                    playerViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen;
+                    self.present(playerViewController, animated: true, completion: nil)
+                    Analytics.log(event: .extrasAction, action: .selectApp, itemId: app.analyticsID)
+                } else {
+                    let webViewController = WebViewController(url: url, title: app.title)
+                    let navigationController = CPENavigationController(rootViewController: webViewController)
+                    navigationController.supportsPortrait = app.supportsPortrait
+                    navigationController.supportsLandscape = app.supportsLandscape
+                    self.present(navigationController, animated: true, completion: nil)
+                    Analytics.log(event: .extrasAction, action: .selectApp, itemId: app.analyticsID)
+                }
             }
         } else {
             if let firstChildExperience = experience.childExperience(atIndex: 0) {

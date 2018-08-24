@@ -6,6 +6,8 @@ import UIKit
 import MapKit
 import CPEData
 
+import AetherPlayer
+
 struct ExperienceCellData {
     var experience: Experience
     var timedEvent: TimedEvent
@@ -211,6 +213,14 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
                     navigationController.supportsLandscape = app.supportsLandscape
                     self.present(navigationController, animated: true, completion: nil)
                     Analytics.log(event: .imeExtrasAction, action: .selectApp, itemId: app.analyticsID)
+                } else if let appGroup = timedEvent.appGroup, let url = appGroup.url, appGroup.interactiveTrackReferences.first?.interactives.first?.encodings.first?.runtimeEnvironment == InteractiveRuntimeEnvironment.ath {
+                    NotificationCenter.default.post(name: .videoPlayerShouldPause, object: nil)
+                    let content = AetherContentManager.shared.get(imfURL: url)
+                    let playerViewController = ATHPlayerViewController(content: content)
+                    playerViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve;
+                    playerViewController.modalPresentationStyle = UIModalPresentationStyle.fullScreen;
+                    self.present(playerViewController, animated: true, completion: nil)
+                    Analytics.log(event: .extrasAction, action: .selectApp, itemId: appGroup.analyticsID)
                 }
             } else {
                 var segueIdentifier: String?
