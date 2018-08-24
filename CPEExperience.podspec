@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
 
   s.name                = 'CPEExperience'
-  s.version             = '4.2.2'
+  s.version             = '4.2.3'
   s.summary             = 'iOS User Experience for Cross-Platform Extras'
   s.license             = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.homepage            = 'https://github.com/warnerbros/cpe-manifest-ios-experience'
   s.authors             = { 'Imran Saadi' => 'imran.saadi@warnerbros.com',
-                            'Alec Ananian' => 'alec.ananian@warnerbros.com'
+                            'Varun Chopra' => 'varun.chopra@warnerbros.com'
                           }
 
   s.platform            = :ios, '8.0'
