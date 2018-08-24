@@ -1,0 +1,8 @@
+binary "CarthageDependencies/GoogleCast.json" "4.3.1"
+github "ImranSaadi/UAProgressView" "0.1.4"
+github "ashleymills/Reachability.swift" "v4.1.0"
+github "drmohundro/SWXMLHash" "4.7.1"
+github "leoneparise/GoogleMaps-Carthage" "2.4.0"
+github "matej/MBProgressHUD" "0.9.2"
+github "rs/SDWebImage" "4.4.2"
+github "warnerbros/cpe-manifest-ios-data" "3.2.0"
