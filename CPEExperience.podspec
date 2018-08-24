@@ -1,17 +1,17 @@
 Pod::Spec.new do |s|
 
   s.name                = 'CPEExperience'
-  s.version             = '4.2.2'
+  s.version             = '4.3.0'
   s.summary             = 'iOS User Experience for Cross-Platform Extras'
   s.license             = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.homepage            = 'https://github.com/warnerbros/cpe-manifest-ios-experience'
   s.authors             = { 'Imran Saadi' => 'imran.saadi@warnerbros.com',
-                            'Alec Ananian' => 'alec.ananian@warnerbros.com'
+                            'Varun Chopra' => 'varun.chopra@warnerbros.com'
                           }
 
   s.platform            = :ios, '8.0'
 
-  s.dependency            'CPEData',            '~> 3.0'
+  s.dependency            'CPEData',            '~> 3.3'
   s.dependency            'google-cast-sdk',    '~> 3.0'
   s.dependency            'MBProgressHUD',      '~> 0.9'
   s.dependency            'SDWebImage',         '~> 4.0'
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   }
 
   # GoogleMaps
-  s.vendored_frameworks = 'Frameworks/*.framework'
+  s.vendored_frameworks = 'Frameworks/*.framework', 'Carthage/Build/iOS/AetherPlayer.framework'
   s.frameworks          = 'Accelerate', 'AVFoundation', 'CoreBluetooth', 'CoreData', 'CoreLocation', 'CoreText', 'GLKit', 'ImageIO', 'OpenGLES', 'QuartzCore', 'Security', 'SystemConfiguration', 'CoreGraphics'
   s.libraries           = 'icucore', 'c++', 'z'
   s.xcconfig            = { 'FRAMEWORK_SEARCH_PATHS' => File.join(File.dirname(__FILE__), 'Frameworks') }

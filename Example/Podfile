@@ -2,14 +2,14 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.0'
 
-project 'CPEExperienceExample'
-workspace 'CPEExperienceExampleWorkspace'
+project 'CPEExperienceExampleCocoapods'
+workspace 'CPEExperienceExampleWorkspaceCocoaPods'
 
 target 'CPEExperienceExample' do
     
     use_frameworks!
     
-    pod 'CPEData',          '~> 3.2'
+    pod 'CPEData',          '~> 3.0'
     pod 'CPEExperience',    :path => '../'
 
 end

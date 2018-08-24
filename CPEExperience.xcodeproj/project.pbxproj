@@ -108,8 +108,10 @@
 		1D513468211569B4000DA314 /* DropdownTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51340C211569B4000DA314 /* DropdownTableViewCell.swift */; };
 		1D513469211569B4000DA314 /* TitledImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51340D211569B4000DA314 /* TitledImageCell.swift */; };
 		1D51346A211569B4000DA314 /* SimpleImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D51340E211569B4000DA314 /* SimpleImageCollectionViewCell.swift */; };
+		1D819B1E213006AE0016283B /* AetherContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D819B1D213006AE0016283B /* AetherContentManager.swift */; };
 		1D890199212290730098F4F2 /* GoogleCast.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D461533211588A800E2BFA1 /* GoogleCast.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		1DD783D12122C67600B321CC /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D5133D1211569B4000DA314 /* HomeViewController.swift */; };
+		1DE7F0C6212F921900184777 /* AetherPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE7F0C5212F921300184777 /* AetherPlayer.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -217,7 +219,9 @@
 		1D51340C211569B4000DA314 /* DropdownTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropdownTableViewCell.swift; sourceTree = "<group>"; };
 		1D51340D211569B4000DA314 /* TitledImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitledImageCell.swift; sourceTree = "<group>"; };
 		1D51340E211569B4000DA314 /* SimpleImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		1D819B1D213006AE0016283B /* AetherContentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AetherContentManager.swift; sourceTree = "<group>"; };
 		1D89019821227DCF0098F4F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DE7F0C5212F921300184777 /* AetherPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AetherPlayer.framework; path = Carthage/Build/iOS/AetherPlayer.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +240,7 @@
 				1D461545211588A800E2BFA1 /* GoogleMaps.framework in Frameworks */,
 				1D461546211588A800E2BFA1 /* SWXMLHash.framework in Frameworks */,
 				1D890199212290730098F4F2 /* GoogleCast.framework in Frameworks */,
+				1DE7F0C6212F921900184777 /* AetherPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +250,7 @@
 		1D461530211588A700E2BFA1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1DE7F0C5212F921300184777 /* AetherPlayer.framework */,
 				1D461537211588A800E2BFA1 /* CPEData.framework */,
 				1D461533211588A800E2BFA1 /* GoogleCast.framework */,
 				1D46153A211588A800E2BFA1 /* GoogleMaps.framework */,
@@ -371,6 +377,7 @@
 		1D5133C7211569B4000DA314 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				1D819B1D213006AE0016283B /* AetherContentManager.swift */,
 				1D5133C8211569B4000DA314 /* Analytics.swift */,
 				1D5133C9211569B4000DA314 /* ExperienceLauncher.swift */,
 				1D5133CA211569B4000DA314 /* ExternalPlaybackManager.swift */,
@@ -610,6 +617,7 @@
 				1D513452211569B4000DA314 /* UIAlertControllerUtils.swift in Sources */,
 				1D51344F211569B4000DA314 /* URLUtils.swift in Sources */,
 				1D513440211569B4000DA314 /* ShoppingDetailViewController.swift in Sources */,
+				1D819B1E213006AE0016283B /* AetherContentManager.swift in Sources */,
 				1D513461211569B4000DA314 /* MultiMapView.swift in Sources */,
 				1D513439211569B4000DA314 /* ImageSceneDetailCollectionViewCell.swift in Sources */,
 				1D51345E211569B4000DA314 /* MenuItemCell.swift in Sources */,

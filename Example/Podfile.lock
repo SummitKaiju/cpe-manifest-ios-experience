@@ -1,8 +1,8 @@
 PODS:
-  - CPEData (3.2.0):
+  - CPEData (3.3.0):
     - SWXMLHash (~> 4.0)
-  - CPEExperience (4.2.2):
-    - CPEData (~> 3.0)
+  - CPEExperience (4.3.0):
+    - CPEData (~> 3.3)
     - google-cast-sdk (~> 3.0)
     - MBProgressHUD (~> 0.9)
     - ReachabilitySwift (~> 4.1.0)
@@ -20,7 +20,7 @@ PODS:
   - UAProgressView (0.1.4)
 
 DEPENDENCIES:
-  - CPEData (~> 3.2)
+  - CPEData (~> 3.0)
   - CPEExperience (from `../`)
 
 SPEC REPOS:
@@ -35,11 +35,11 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   CPEExperience:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  CPEData: d7f6e2c9ebf2d04bed8069af44c757193fc42716
-  CPEExperience: 40b4e7f29db909b279a0ae1d569c0bc5669a21a9
+  CPEData: 52869570fd2e5e0753cd5d4b7f3df8bf2d5eb09d
+  CPEExperience: 52679fa7290258206b10caeeec132b149491cb72
   google-cast-sdk: 2736ac5f0c60d26a559f58c6bb37ced7465e9485
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   SWXMLHash: 661b67bc94a01fe71a6ad4ca690cf2cafa5d1d6f
   UAProgressView: 6796f5aa05037fb2940521636163b9db40a6c534
 
-PODFILE CHECKSUM: e38aba4b91672c748b9c65e1172be2ece9bb1935
+PODFILE CHECKSUM: 7fc1f55c17d007f261964c1e23e1a83bb6a95df5
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

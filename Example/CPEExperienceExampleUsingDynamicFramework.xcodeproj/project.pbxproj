@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D443496212FA2A100A9A25E /* AetherPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D443495212FA29900A9A25E /* AetherPlayer.framework */; };
+		1D443497212FA2A100A9A25E /* AetherPlayer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D443495212FA29900A9A25E /* AetherPlayer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1D608F8E2123E69500D397AD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8D2123E69500D397AD /* MessageUI.framework */; };
 		1D608F902123E69C00D397AD /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F8F2123E69C00D397AD /* CoreText.framework */; };
 		1D608F922123E6AC00D397AD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D608F912123E6AC00D397AD /* QuartzCore.framework */; };
@@ -61,6 +63,7 @@
 				1DD783C42122A99100B321CC /* SWXMLHash.framework in Embed Frameworks */,
 				1DD783BC2122A99100B321CC /* GoogleMapsM4B.framework in Embed Frameworks */,
 				1DD783BA2122A99100B321CC /* GoogleMapsCore.framework in Embed Frameworks */,
+				1D443497212FA2A100A9A25E /* AetherPlayer.framework in Embed Frameworks */,
 				1DD783C02122A99100B321CC /* Reachability.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -69,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1D443495212FA29900A9A25E /* AetherPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AetherPlayer.framework; sourceTree = "<group>"; };
 		1D608F8A2123E4A900D397AD /* CPEExperience.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CPEExperience.framework; sourceTree = "<group>"; };
 		1D608F8D2123E69500D397AD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		1D608F8F2123E69C00D397AD /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -117,6 +121,7 @@
 				1DD783BB2122A99100B321CC /* GoogleMapsM4B.framework in Frameworks */,
 				1DD783B92122A99100B321CC /* GoogleMapsCore.framework in Frameworks */,
 				1DD783BF2122A99100B321CC /* Reachability.framework in Frameworks */,
+				1D443496212FA2A100A9A25E /* AetherPlayer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +179,7 @@
 		1D8901C92122A1510098F4F2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1D443495212FA29900A9A25E /* AetherPlayer.framework */,
 				1D608F932123E6BB00D397AD /* MapKit.framework */,
 				1D608F912123E6AC00D397AD /* QuartzCore.framework */,
 				1D608F8F2123E69C00D397AD /* CoreText.framework */,

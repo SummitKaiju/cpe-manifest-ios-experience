@@ -72,10 +72,10 @@ class InputViewController: UIViewController {
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapView))
         self.view.addGestureRecognizer(singleTapGestureRecognizer)
 
-        manifestXMLTextField.text = "https://cpe-manifest.s3.amazonaws.com/xml/urn:dece:cid:eidr-s:EE48-FE4D-B363-71AF-A3AB-G/FantasticBeasts_V1.2_Manifest.xml"
-        appDataXMLTextField.text = "https://cpe-manifest.s3.amazonaws.com/xml/urn:dece:cid:eidr-s:EE48-FE4D-B363-71AF-A3AB-G/FantasticBeasts_V1.1_AppData.xml"
-        cpeStyleXMLTextField.text = "https://cpe-manifest.s3.amazonaws.com/xml/urn:dece:cid:eidr-s:EE48-FE4D-B363-71AF-A3AB-G/FantasticBeasts_V1.1_style.xml"
-        mainFeatureTextField.text = Constants.BigBuckBunnyURL.absoluteString
+        manifestXMLTextField.text = "https://stream.aetherinc.co/content/manifests/JW_16g.xml"
+        appDataXMLTextField.text = ""
+        cpeStyleXMLTextField.text = "https://stream.aetherinc.co/content/manifests/JW_style.xml"
+        mainFeatureTextField.text = "https://stream.aetherinc.co/nbcuni/ath_sample3.mp4"
     }
 
     @objc private func onTapView() {

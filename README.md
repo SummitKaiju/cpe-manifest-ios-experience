@@ -19,7 +19,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-    pod 'CPEExperience', '~> 4.1'
+    pod 'CPEExperience', '~> 4.3'
 end
 ```
 
