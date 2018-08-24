@@ -13,6 +13,7 @@ open  class ExperienceLauncher {
     private static var reachability = Reachability()!
     private static var reachabilityChangedObserver: NSObjectProtocol?
     static var isBeingDismissed = false
+    private static var parentViewController: UIViewController?
 
     open static func launch(fromViewController viewController: UIViewController) {
         SDWebImageCodersManager.sharedInstance().coders = [SimpleImageIOCoder.shared()]
@@ -39,6 +40,9 @@ open  class ExperienceLauncher {
         delegate?.experienceWillOpen()
         let homeViewController = UIStoryboard.viewController(for: HomeViewController.self) as? HomeViewController
         viewController.present(homeViewController!, animated: true, completion: nil)
+        
+        // Track parent view controller
+        parentViewController = homeViewController
     }
 
     open static func close() {
@@ -51,9 +55,11 @@ open  class ExperienceLauncher {
 
         delegate?.experienceWillClose()
         CacheManager.clearTempDirectory()
-        UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: true) {
+
+        parentViewController?.dismiss(animated: true) {
             ExperienceLauncher.isBeingDismissed = false
             CPEXMLSuite.current = nil
+            parentViewController = nil
         }
     }
 
