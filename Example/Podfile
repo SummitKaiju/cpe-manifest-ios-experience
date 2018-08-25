@@ -6,8 +6,7 @@ project 'CPEExperienceExample'
 workspace 'CPEExperienceExampleWorkspace'
 
 target 'CPEExperienceExample' do
-    
-    use_frameworks!
+    use_modular_headers!
     
     pod 'CPEData',          '~> 3.2'
     pod 'CPEExperience',    :path => '../'

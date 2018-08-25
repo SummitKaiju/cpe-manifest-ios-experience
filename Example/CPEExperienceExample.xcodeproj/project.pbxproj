@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D51338E21156150000DA314 /* Pods_CPEExperienceExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19E3AE4715C79133C0B08FED /* Pods_CPEExperienceExample.framework */; };
 		495CF36A1CC042BA006AE290 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 495CF3691CC042BA006AE290 /* CoreText.framework */; };
 		49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */; };
 		70BB990F1E415DE7008D9027 /* ExamplePlaybackAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70BB990E1E415DE7008D9027 /* ExamplePlaybackAsset.swift */; };
@@ -17,12 +16,12 @@
 		70C9EA6F1D08A3C5002299B3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA6D1D08A3C5002299B3 /* LaunchScreen.storyboard */; };
 		70C9EA701D08A3C5002299B3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 70C9EA6E1D08A3C5002299B3 /* Main.storyboard */; };
 		70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */; };
-		70F2FE4C1E8C3560006F8A12 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 70F2FE4B1E8C3560006F8A12 /* GoogleMaps.bundle */; };
 		70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70FECF7C1C657976005B1A44 /* MapKit.framework */; };
+		D6620A15650297549115AD4F /* libPods-CPEExperienceExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AA8685DFFA695730E24BE82 /* libPods-CPEExperienceExample.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		19E3AE4715C79133C0B08FED /* Pods_CPEExperienceExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CPEExperienceExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2AA8685DFFA695730E24BE82 /* libPods-CPEExperienceExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CPEExperienceExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4921D9731C3EFD0B00ED2AA6 /* CPEExperienceExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CPEExperienceExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		492267ED1C7B911100B306A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		495CF3691CC042BA006AE290 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -37,7 +36,6 @@
 		70C9EA6D1D08A3C5002299B3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		70C9EA6E1D08A3C5002299B3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		70F2FE4B1E8C3560006F8A12 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = ../Frameworks/GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		70FECF7C1C657976005B1A44 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		B2A09D60B9286D70D8ACA0AA /* Pods-CPEExperienceExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CPEExperienceExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -51,7 +49,7 @@
 				70DF2F8C1CA5F2C2007AD2A0 /* QuartzCore.framework in Frameworks */,
 				49C1E65F1C7FA9930076E9F3 /* MessageUI.framework in Frameworks */,
 				70FECF7D1C657976005B1A44 /* MapKit.framework in Frameworks */,
-				1D51338E21156150000DA314 /* Pods_CPEExperienceExample.framework in Frameworks */,
+				D6620A15650297549115AD4F /* libPods-CPEExperienceExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,14 +78,13 @@
 		5241E5CC48A5B4B0CBC8FFE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				70F2FE4B1E8C3560006F8A12 /* GoogleMaps.bundle */,
 				495CF3691CC042BA006AE290 /* CoreText.framework */,
 				70DF2F8B1CA5F2C2007AD2A0 /* QuartzCore.framework */,
 				49F502541C890E6500DFAD88 /* Twitter.framework */,
 				49C1E65E1C7FA9930076E9F3 /* MessageUI.framework */,
 				492267ED1C7B911100B306A2 /* Social.framework */,
 				70FECF7C1C657976005B1A44 /* MapKit.framework */,
-				19E3AE4715C79133C0B08FED /* Pods_CPEExperienceExample.framework */,
+				2AA8685DFFA695730E24BE82 /* libPods-CPEExperienceExample.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,6 +131,7 @@
 				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
 				4921D9711C3EFD0B00ED2AA6 /* Resources */,
 				FAD03E2525E3A21852F62079 /* [CP] Embed Pods Frameworks */,
+				F877123F58FA243D716B76F2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -186,7 +184,6 @@
 				70C9EA6F1D08A3C5002299B3 /* LaunchScreen.storyboard in Resources */,
 				70C0937A1D0F6DF700BFC1E4 /* Data in Resources */,
 				70C9EA701D08A3C5002299B3 /* Main.storyboard in Resources */,
-				70F2FE4C1E8C3560006F8A12 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,36 +208,42 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F877123F58FA243D716B76F2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/CPEExperience/CPEExperience.bundle",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CPEExperience.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FAD03E2525E3A21852F62079 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CPEData/CPEData.framework",
-				"${BUILT_PRODUCTS_DIR}/CPEExperience/CPEExperience.framework",
-				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SWXMLHash/SWXMLHash.framework",
-				"${BUILT_PRODUCTS_DIR}/UAProgressView/UAProgressView.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh",
 				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CPEData.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CPEExperience.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SWXMLHash.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UAProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleCast.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

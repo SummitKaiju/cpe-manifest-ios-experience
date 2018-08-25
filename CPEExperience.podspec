@@ -17,6 +17,8 @@ Pod::Spec.new do |s|
   s.dependency            'SDWebImage',         '~> 4.0'
   s.dependency            'UAProgressView',     '~> 0.1'
   s.dependency            'ReachabilitySwift',  '~> 4.1.0'
+  s.dependency            'GoogleMaps',         '~> 2.7.0'
+
 
   s.source              = { :git => 'https://github.com/warnerbros/cpe-manifest-ios-experience.git', :tag => s.version.to_s }
   s.source_files        = 'Source/**/*.swift', 'Source/*.swift'
@@ -24,7 +26,6 @@ Pod::Spec.new do |s|
     'CPEExperience' => ['Source/**/*.{xcassets,storyboard,strings,xib,ttf}']
   }
 
-  # GoogleMaps
   s.vendored_frameworks = 'Frameworks/*.framework'
   s.frameworks          = 'Accelerate', 'AVFoundation', 'CoreBluetooth', 'CoreData', 'CoreLocation', 'CoreText', 'GLKit', 'ImageIO', 'OpenGLES', 'QuartzCore', 'Security', 'SystemConfiguration', 'CoreGraphics'
   s.libraries           = 'icucore', 'c++', 'z'

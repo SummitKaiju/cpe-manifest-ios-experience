@@ -1,9 +1,10 @@
 PODS:
-  - CPEData (3.2.0):
+  - CPEData (3.3.0):
     - SWXMLHash (~> 4.0)
   - CPEExperience (4.2.3):
     - CPEData (~> 3.0)
     - google-cast-sdk (~> 3.0)
+    - GoogleMaps (~> 2.7.0)
     - MBProgressHUD (~> 0.9)
     - ReachabilitySwift (~> 4.1.0)
     - SDWebImage (~> 4.0)
@@ -11,6 +12,11 @@ PODS:
   - google-cast-sdk (3.5.6):
     - google-cast-sdk/Core (= 3.5.6)
   - google-cast-sdk/Core (3.5.6)
+  - GoogleMaps (2.7.0):
+    - GoogleMaps/Maps (= 2.7.0)
+  - GoogleMaps/Base (2.7.0)
+  - GoogleMaps/Maps (2.7.0):
+    - GoogleMaps/Base
   - MBProgressHUD (0.9.2)
   - ReachabilitySwift (4.1.0)
   - SDWebImage (4.4.2):
@@ -27,6 +33,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CPEData
     - google-cast-sdk
+    - GoogleMaps
     - MBProgressHUD
     - ReachabilitySwift
     - SDWebImage
@@ -38,15 +45,16 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CPEData: d7f6e2c9ebf2d04bed8069af44c757193fc42716
-  CPEExperience: e426bf7ea1b51be6bc199437ff789ade24760b08
+  CPEData: 52869570fd2e5e0753cd5d4b7f3df8bf2d5eb09d
+  CPEExperience: be6a78f0b141e248db0addf6e97bf12034f848fc
   google-cast-sdk: 2736ac5f0c60d26a559f58c6bb37ced7465e9485
+  GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   SWXMLHash: 661b67bc94a01fe71a6ad4ca690cf2cafa5d1d6f
   UAProgressView: 6796f5aa05037fb2940521636163b9db40a6c534
 
-PODFILE CHECKSUM: e38aba4b91672c748b9c65e1172be2ece9bb1935
+PODFILE CHECKSUM: 2d43a7a7c6370764d05de30e8b7b5f768619ecf3
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.1
