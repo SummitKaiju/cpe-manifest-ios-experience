@@ -130,7 +130,6 @@
 				4921D96F1C3EFD0B00ED2AA6 /* Sources */,
 				4921D9701C3EFD0B00ED2AA6 /* Frameworks */,
 				4921D9711C3EFD0B00ED2AA6 /* Resources */,
-				FAD03E2525E3A21852F62079 /* [CP] Embed Pods Frameworks */,
 				F877123F58FA243D716B76F2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -214,36 +213,22 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/CPEExperience/CPEExperience.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.3.2_static/GoogleCast.framework/GoogleCastCoreResources.bundle",
+				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-ios-4.3.2_static/GoogleCast.framework/GoogleCastUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CPEExperience.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleCastCoreResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleCastUIResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		FAD03E2525E3A21852F62079 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh",
-				"${PODS_ROOT}/google-cast-sdk/GoogleCastSDK-Public-3.5.6-Release/GoogleCast.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleCast.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CPEExperienceExample/Pods-CPEExperienceExample-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -8,7 +8,7 @@ workspace 'CPEExperienceExampleWorkspace'
 target 'CPEExperienceExample' do
     use_modular_headers!
     
-    pod 'CPEData',          '~> 3.2'
+    pod 'CPEData',          '~> 3.3'
     pod 'CPEExperience',    :path => '../'
 
 end

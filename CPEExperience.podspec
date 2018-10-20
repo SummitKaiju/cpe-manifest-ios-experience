@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                = 'CPEExperience'
-  s.version             = '4.2.3'
+  s.version             = '4.2.4'
   s.summary             = 'iOS User Experience for Cross-Platform Extras'
   s.license             = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.homepage            = 'https://github.com/warnerbros/cpe-manifest-ios-experience'
@@ -9,10 +9,10 @@ Pod::Spec.new do |s|
                             'Varun Chopra' => 'varun.chopra@warnerbros.com'
                           }
 
-  s.platform            = :ios, '8.0'
+  s.platform            = :ios, '9.0'
 
   s.dependency            'CPEData',            '~> 3.0'
-  s.dependency            'google-cast-sdk',    '~> 3.0'
+  s.dependency            'google-cast-sdk',    '~> 4.0'
   s.dependency            'MBProgressHUD',      '~> 0.9'
   s.dependency            'SDWebImage',         '~> 4.0'
   s.dependency            'UAProgressView',     '~> 0.1'
