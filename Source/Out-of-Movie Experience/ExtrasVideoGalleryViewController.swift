@@ -94,7 +94,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController {
         willPlayNextItemObserver = NotificationCenter.default.addObserver(forName: .videoPlayerWillPlayNextItem, object: nil, queue: OperationQueue.main) { [weak self] (notification) -> Void in
             if let strongSelf = self, let index = notification.userInfo?[NotificationConstants.index] as? Int, index < max(strongSelf.experience.numChildExperiences, 1) {
                 let indexPath = IndexPath(row: index, section: 0)
-                strongSelf.galleryTableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+                strongSelf.galleryTableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.top)
                 strongSelf.tableView(strongSelf.galleryTableView, didSelectRowAt: indexPath)
             }
         }
@@ -135,7 +135,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController {
 
         if !didInitialSetup {
             let selectedPath = IndexPath(row: 0, section: 0)
-            galleryTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+            galleryTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableView.ScrollPosition.top)
             self.tableView(galleryTableView, didSelectRowAt: selectedPath)
             didInitialSetup = true
         } else {
@@ -155,7 +155,7 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController {
         }
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return (containerBottomConstraint != nil && !containerBottomConstraint!.isActive)
     }
 
@@ -178,8 +178,8 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController {
                 if !videoPlayerExists {
                     videoPlayerViewController.view.frame = videoContainerView.bounds
                     videoContainerView.addSubview(videoPlayerViewController.view)
-                    self.addChildViewController(videoPlayerViewController)
-                    videoPlayerViewController.didMove(toParentViewController: self)
+                    self.addChild(videoPlayerViewController)
+                    videoPlayerViewController.didMove(toParent: self)
                 }
 
                 videoPlayerViewController.playAsset(withURL: videoURL, title: selectedExperience.title, imageURL: selectedExperience.thumbnailImageURL)
@@ -195,9 +195,9 @@ class ExtrasVideoGalleryViewController: ExtrasExperienceViewController {
     }
 
     private func destroyVideoPlayer() {
-        videoPlayerViewController?.willMove(toParentViewController: nil)
+        videoPlayerViewController?.willMove(toParent: nil)
         videoPlayerViewController?.view.removeFromSuperview()
-        videoPlayerViewController?.removeFromParentViewController()
+        videoPlayerViewController?.removeFromParent()
         videoPlayerViewController = nil
     }
 

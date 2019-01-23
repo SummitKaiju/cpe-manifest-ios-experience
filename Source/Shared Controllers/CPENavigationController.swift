@@ -6,8 +6,8 @@ import UIKit
 
 class CPENavigationController: UINavigationController {
     
-    public var supportsPortrait = false
-    public var supportsLandscape = true
+    @objc public var supportsPortrait = false
+    @objc public var supportsLandscape = true
     private weak var lastPresentedController : UIViewController?
     
     override open var supportedInterfaceOrientations: UIInterfaceOrientationMask {

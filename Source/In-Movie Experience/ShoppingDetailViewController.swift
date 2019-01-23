@@ -37,7 +37,7 @@ class ShoppingDetailViewController: SceneDetailViewController {
     @IBOutlet private var shopToProductPriceConstraint: NSLayoutConstraint!
 
     var mode = ShoppingDetailMode.extras
-    var products: [ProductItem]?
+    @objc var products: [ProductItem]?
     private var closeDetailsViewObserver: NSObjectProtocol?
     private var videoPlayerViewController: VideoPlayerViewController?
 
@@ -47,7 +47,7 @@ class ShoppingDetailViewController: SceneDetailViewController {
         }
     }
 
-    var currentProduct: ProductItem? {
+    @objc var currentProduct: ProductItem? {
         didSet {
             if currentProduct != oldValue {
                 if let product = currentProduct, product.hasExactMatchData {
@@ -161,8 +161,8 @@ class ShoppingDetailViewController: SceneDetailViewController {
                     videoPlayerViewController.mode = VideoPlayerMode.supplemental
                     videoPlayerViewController.view.frame = productVideoContainerView.bounds
                     productVideoContainerView.addSubview(videoPlayerViewController.view)
-                    self.addChildViewController(videoPlayerViewController)
-                    videoPlayerViewController.didMove(toParentViewController: self)
+                    self.addChild(videoPlayerViewController)
+                    videoPlayerViewController.didMove(toParent: self)
                     videoPlayerViewController.topToolbar?.removeFromSuperview()
                 }
 

@@ -97,8 +97,8 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
 
             videoPlayerViewController.view.frame = videoContainerView.bounds
             videoContainerView.addSubview(videoPlayerViewController.view)
-            self.addChildViewController(videoPlayerViewController)
-            videoPlayerViewController.didMove(toParentViewController: self)
+            self.addChild(videoPlayerViewController)
+            videoPlayerViewController.didMove(toParent: self)
 
             videoPlayerViewController.playAsset(withURL: videoURL)
 
@@ -122,9 +122,9 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
         galleryScrollView.load(with: nil)
         galleryScrollView.isHidden = true
 
-        videoPlayerViewController?.willMove(toParentViewController: nil)
+        videoPlayerViewController?.willMove(toParent: nil)
         videoPlayerViewController?.view.removeFromSuperview()
-        videoPlayerViewController?.removeFromParentViewController()
+        videoPlayerViewController?.removeFromParent()
         videoPlayerViewController = nil
     }
 
@@ -181,7 +181,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
     }
 
     // MARK: UICollectionViewDelegateFlowLayout
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+    @objc func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.frame.width / (DeviceType.IS_IPAD ? 4 : 2.5)), height: collectionView.frame.height)
     }
 
@@ -189,7 +189,7 @@ class MapDetailViewController: SceneDetailViewController, UICollectionViewDataSo
 
 extension MapDetailViewController: MultiMapViewDelegate {
 
-    func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
+    @objc func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
         animateToCenter()
     }
 

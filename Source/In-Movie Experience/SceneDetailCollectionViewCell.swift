@@ -24,7 +24,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    internal var descriptionText: String? {
+    @objc internal var descriptionText: String? {
         set {
             descriptionLabel.text = newValue
         }
@@ -43,7 +43,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
     }
 
     private var lastSavedTime: Double = -1.0
-    var currentTime: Double = -1.0 {
+    @objc var currentTime: Double = -1.0 {
         didSet {
             if lastSavedTime == -1 || abs(currentTime - lastSavedTime) >= Constants.UpdateInterval {
                 lastSavedTime = currentTime
@@ -59,7 +59,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         timedEvent = nil
     }
 
-    internal func timedEventDidChange() {
+    @objc internal func timedEventDidChange() {
         title = timedEvent?.experience?.title
 
         if timedEvent != nil && timedEvent!.isType(.clipShare) {
@@ -69,7 +69,7 @@ class SceneDetailCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    internal func currentTimeDidChange() {
+    @objc internal func currentTimeDidChange() {
         // Override
     }
 }

@@ -14,7 +14,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         static let CloseButtonPadding: CGFloat = 15
     }
 
-    var allowsFullScreen = true
+    @objc var allowsFullScreen = true
     private var toolbar: UIToolbar?
     private var originalFrame: CGRect?
     private var originalContainerFrame: CGRect?
@@ -23,7 +23,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     private var isTurntable = false
     private var pictures = [Picture]()
 
-    var isFullScreen = false {
+    @objc var isFullScreen = false {
         didSet {
             if isFullScreen != oldValue {
                 closeButton.isHidden = !isFullScreen
@@ -63,7 +63,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
 
     private var scrollViewPageWidth: CGFloat = 0
-    var currentPage = 0 {
+    @objc var currentPage = 0 {
         didSet {
             if !isTurntable {
                 loadGalleryImageForPage(currentPage)
@@ -89,11 +89,11 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
 
-    var currentImageURL: URL? {
+    @objc var currentImageURL: URL? {
         return picture(forPage: currentPage)?.imageURL
     }
 
-    var currentImageId: String? {
+    @objc var currentImageId: String? {
         return picture(forPage: currentPage)?.imageID
     }
 
@@ -131,7 +131,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             toolbarFrame.origin.x = self.contentOffset.x
             toolbarFrame.origin.y = self.contentOffset.y + (self.frame.height - Constants.ToolbarHeight) + 1
             toolbar.frame = toolbarFrame
-            self.bringSubview(toFront: toolbar)
+            self.bringSubviewToFront(toolbar)
 
             if let toolbarItems = toolbar.items {
                 if let turntableSlider = toolbarItems.first?.customView as? UISlider {
@@ -146,7 +146,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
             var closeButtonFrame = closeButton.frame
             closeButtonFrame.origin.x = self.contentOffset.x + self.frame.width - Constants.CloseButtonSize - Constants.CloseButtonPadding
             closeButton.frame = closeButtonFrame
-            self.bringSubview(toFront: closeButton)
+            self.bringSubviewToFront(closeButton)
         }
     }
 
@@ -238,12 +238,12 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
 
-    func removeToolbar() {
+    @objc func removeToolbar() {
         toolbar?.removeFromSuperview()
         toolbar = nil
     }
 
-    func layoutPages() {
+    @objc func layoutPages() {
         scrollViewPageWidth = self.bounds.width
         for i in 0 ..< pictures.count {
             var pageView = self.viewWithTag(i + 1) as? UIScrollView
@@ -287,12 +287,12 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
     }
 
     // MARK: Actions
-    func toggleFullScreen() {
+    @objc func toggleFullScreen() {
         isFullScreen = !isFullScreen
         self.layoutPages()
     }
 
-    func turntableSliderValueChanged(_ slider: UISlider!) {
+    @objc func turntableSliderValueChanged(_ slider: UISlider!) {
         gotoPage(Int(floor(slider.value)), animated: false)
     }
 
@@ -317,7 +317,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         return (self.viewWithTag(page + 1) as? UIScrollView)?.subviews.first as? UIImageView
     }
 
-    func cleanInvisibleImages(skipSubsequentImage: Bool = false) {
+    @objc func cleanInvisibleImages(skipSubsequentImage: Bool = false) {
         for subview in self.subviews {
             if subview.tag != (currentPage + 1) && (!skipSubsequentImage || subview.tag != (currentPage + 2)) {
                 if let imageView = subview.subviews.first as? UIImageView, imageView.image != nil {
@@ -327,7 +327,7 @@ class ImageGalleryScrollView: UIScrollView, UIScrollViewDelegate {
         }
     }
 
-    func gotoPage(_ page: Int, animated: Bool) {
+    @objc func gotoPage(_ page: Int, animated: Bool) {
         self.setContentOffset(CGPoint(x: CGFloat(page) * scrollViewPageWidth, y: 0), animated: animated)
         currentPage = page
     }

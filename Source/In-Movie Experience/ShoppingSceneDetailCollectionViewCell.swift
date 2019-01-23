@@ -13,8 +13,8 @@ enum ShoppingProductImageType {
 
 class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
 
-    static let NibName = "ShoppingSceneDetailCollectionViewCell"
-    static let ReuseIdentifier = "ShoppingSceneDetailCollectionViewCellReuseIdentifier"
+    @objc static let NibName = "ShoppingSceneDetailCollectionViewCell"
+    @objc static let ReuseIdentifier = "ShoppingSceneDetailCollectionViewCellReuseIdentifier"
 
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var bullseyeImageView: UIImageView!
@@ -52,7 +52,7 @@ class ShoppingSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
 
     private var currentProductFrameTime = -1.0
     private var currentProductSessionDataTask: URLSessionDataTask?
-    var products: [ProductItem]? {
+    @objc var products: [ProductItem]? {
         didSet {
             currentProduct = products?.first
         }

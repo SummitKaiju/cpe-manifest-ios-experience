@@ -56,8 +56,8 @@ class GallerySceneDetailViewController: SceneDetailViewController, UIScrollViewD
 
                         videoPlayerViewController.view.frame = videoContainerView.bounds
                         videoContainerView.addSubview(videoPlayerViewController.view)
-                        self.addChildViewController(videoPlayerViewController)
-                        videoPlayerViewController.didMove(toParentViewController: self)
+                        self.addChild(videoPlayerViewController)
+                        videoPlayerViewController.didMove(toParent: self)
 
                         videoPlayerViewController.playAsset(withURL: videoURL)
                     }

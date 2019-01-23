@@ -271,10 +271,10 @@ class HomeViewController: UIViewController {
             backgroundVideoPreviewImageView!.contentMode = .scaleAspectFill
             backgroundVideoPreviewImageView!.image = image
             self.view.addSubview(backgroundVideoPreviewImageView!)
-            self.view.bringSubview(toFront: exitButton)
-            self.view.bringSubview(toFront: buttonOverlayView)
+            self.view.bringSubviewToFront(exitButton)
+            self.view.bringSubviewToFront(buttonOverlayView)
             if let titleOverlayView = titleOverlayView {
-                self.view.bringSubview(toFront: titleOverlayView)
+                self.view.bringSubviewToFront(titleOverlayView)
             }
         }
 
@@ -457,7 +457,7 @@ class HomeViewController: UIViewController {
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         if DeviceType.IS_IPAD {
             let interfaceOrientation = UIApplication.shared.statusBarOrientation
-            return UIInterfaceOrientationIsLandscape(interfaceOrientation) ? interfaceOrientation : .landscapeLeft
+            return interfaceOrientation.isLandscape ? interfaceOrientation : .landscapeLeft
         }
 
         return super.preferredInterfaceOrientationForPresentation
@@ -529,8 +529,8 @@ class HomeViewController: UIViewController {
 
             videoPlayerViewController.view.frame = backgroundVideoView.bounds
             backgroundVideoView.addSubview(videoPlayerViewController.view)
-            self.addChildViewController(videoPlayerViewController)
-            videoPlayerViewController.didMove(toParentViewController: self)
+            self.addChild(videoPlayerViewController)
+            videoPlayerViewController.didMove(toParent: self)
 
             backgroundVideoTimeObserver = NotificationCenter.default.addObserver(forName: .videoPlayerDidChangeTime, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
                 if let strongSelf = self, let time = notification.userInfo?[NotificationConstants.time] as? Double {
@@ -584,7 +584,7 @@ class HomeViewController: UIViewController {
             let audioPlayerItem = AVPlayerItem(asset: AVAsset(url: backgroundAudioUrl))
             backgroundAudioDidFinishPlayingObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: audioPlayerItem, queue: nil, using: { (_) in
                 DispatchQueue.main.async {
-                    self.backgroundAudioPlayer?.seek(to: kCMTimeZero)
+                    self.backgroundAudioPlayer?.seek(to: CMTime.zero)
                     self.backgroundAudioPlayer?.play()
                 }
             })
@@ -611,9 +611,9 @@ class HomeViewController: UIViewController {
             backgroundAudioDidFinishPlayingObserver = nil
         }
 
-        backgroundVideoPlayerViewController?.willMove(toParentViewController: nil)
+        backgroundVideoPlayerViewController?.willMove(toParent: nil)
         backgroundVideoPlayerViewController?.view.removeFromSuperview()
-        backgroundVideoPlayerViewController?.removeFromParentViewController()
+        backgroundVideoPlayerViewController?.removeFromParent()
         backgroundVideoPlayerViewController = nil
         backgroundImageView.image = nil
         backgroundAudioPlayer = nil

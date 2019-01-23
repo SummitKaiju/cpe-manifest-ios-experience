@@ -95,7 +95,7 @@ class InMovieExperienceExtrasViewController: UIViewController {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.currentTime = time
 
-                let newPeople = CPEXMLSuite.current!.manifest.timedEvents(atTimecode: time, type: .person)?.flatMap({ ($0.person?.jobFunction == self.currentPersonJobFunction ? $0.person : nil) }).sorted()
+                let newPeople = CPEXMLSuite.current!.manifest.timedEvents(atTimecode: time, type: .person)?.compactMap({ ($0.person?.jobFunction == self.currentPersonJobFunction ? $0.person : nil) }).sorted()
                 if self.currentPeople == nil || newPeople == nil || newPeople!.contains(where: { !self.currentPeople!.contains($0) }) || self.currentPeople!.contains(where: { !newPeople!.contains($0) }) {
                     DispatchQueue.main.async {
                         self.currentPeople = newPeople
@@ -184,11 +184,11 @@ extension InMovieExperienceExtrasViewController: UITableViewDataSource {
             personSegmentedControl?.frame = CGRect(x: Constants.SegmentedControlPadding, y: 0, width: tableView.frame.width - (Constants.SegmentedControlPadding * 2), height: Constants.SegmentedControlHeight)
             personSegmentedControl?.tintColor = UIColor(netHex: 0xd61414)
             personSegmentedControl?.setTitleTextAttributes([
-                NSFontAttributeName: UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
-                NSForegroundColorAttributeName: UIColor.white
+                NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.font)): UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
+                NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)): UIColor.white
             ], for: .normal)
             personSegmentedControl?.setTitleTextAttributes([
-                NSForegroundColorAttributeName: UIColor.white
+                NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)): UIColor.white
                 ], for: .selected)
             personSegmentedControl?.selectedSegmentIndex = 0
             personSegmentedControl?.addTarget(self, action: #selector(onSelectPersonJobFunction), for: .valueChanged)
@@ -237,4 +237,9 @@ extension InMovieExperienceExtrasViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

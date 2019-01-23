@@ -6,15 +6,15 @@ import UIKit
 
 open class SimpleImageCollectionViewCell: UICollectionViewCell {
 
-    public static let NibName = "SimpleImageCollectionViewCell"
-    public static let BaseReuseIdentifier = "SimpleImageCollectionViewCellReuseIdentifier"
+    @objc public static let NibName = "SimpleImageCollectionViewCell"
+    @objc public static let BaseReuseIdentifier = "SimpleImageCollectionViewCellReuseIdentifier"
 
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton?
 
-    public var showsSelectedBorder = false
+    @objc public var showsSelectedBorder = false
 
-    open var imageURL: URL? {
+    @objc open var imageURL: URL? {
         set {
             if let url = newValue {
                 self.imageView.sd_setImage(with: url)
@@ -29,7 +29,7 @@ open class SimpleImageCollectionViewCell: UICollectionViewCell {
         }
     }
 
-    open var playButtonVisible: Bool {
+    @objc open var playButtonVisible: Bool {
         set {
             playButton?.isHidden = !newValue
         }

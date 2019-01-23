@@ -6,8 +6,8 @@ import MapKit
 
 class MapSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
 
-    static let NibName = "MapSceneDetailCollectionViewCell"
-    static let ReuseIdentifier = "MapSceneDetailCollectionViewCellReuseIdentifier"
+    @objc static let NibName = "MapSceneDetailCollectionViewCell"
+    @objc static let ReuseIdentifier = "MapSceneDetailCollectionViewCellReuseIdentifier"
 
     @IBOutlet weak var mapView: MultiMapView!
 

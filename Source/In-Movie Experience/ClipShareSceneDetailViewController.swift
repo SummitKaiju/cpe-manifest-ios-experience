@@ -34,9 +34,9 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
     }
 
     private func destroyVideoPlayer() {
-        videoPlayerViewController?.willMove(toParentViewController: nil)
+        videoPlayerViewController?.willMove(toParent: nil)
         videoPlayerViewController?.view.removeFromSuperview()
-        videoPlayerViewController?.removeFromParentViewController()
+        videoPlayerViewController?.removeFromParent()
         videoPlayerViewController = nil
         videoContainerView.isHidden = true
         previewImageView.isHidden = false
@@ -87,8 +87,8 @@ class ClipShareSceneDetailViewController: SceneDetailViewController {
 
             videoContainerView.isHidden = false
             videoContainerView.addSubview(videoPlayerViewController.view)
-            self.addChildViewController(videoPlayerViewController)
-            videoPlayerViewController.didMove(toParentViewController: self)
+            self.addChild(videoPlayerViewController)
+            videoPlayerViewController.didMove(toParent: self)
 
             videoPlayerViewController.playAsset(withURL: videoURL)
             self.videoPlayerViewController = videoPlayerViewController

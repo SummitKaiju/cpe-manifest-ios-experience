@@ -8,8 +8,8 @@ import SDWebImage
 
 class VideoCell: UITableViewCell {
 
-    static let ReuseIdentifier = "VideoCellReuseIdentifier"
-    static let NibName = "VideoCell" + (DeviceType.IS_IPAD ? "" : "_iPhone")
+    @objc static let ReuseIdentifier = "VideoCellReuseIdentifier"
+    @objc static let NibName = "VideoCell" + (DeviceType.IS_IPAD ? "" : "_iPhone")
 
     @IBOutlet weak private var thumbnailContainerView: UIView!
     @IBOutlet weak private var thumbnailImageView: UIImageView!
@@ -96,14 +96,14 @@ class VideoCell: UITableViewCell {
         }
     }
 
-    func updateCellStyle() {
+    @objc func updateCellStyle() {
         thumbnailContainerView.layer.borderColor = UIColor.white.cgColor
         thumbnailContainerView.layer.borderWidth = (self.isSelected ? 2 : 0)
         captionLabel.textColor = (self.isSelected ? UIColor.themePrimary : UIColor.white)
         playIconImageView.isHidden = (experience == nil || experience!.isType(.gallery)) || self.isSelected
     }
 
-    func setWatched() {
+    @objc func setWatched() {
         self.runtimeLabel.text = String.localize("label.watched")
     }
 

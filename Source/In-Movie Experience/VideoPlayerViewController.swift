@@ -41,11 +41,11 @@ class VideoPlayerPlaybackView: UIView {
         return AVPlayerLayer.self
     }
 
-    var playerLayer: AVPlayerLayer? {
+    @objc var playerLayer: AVPlayerLayer? {
         return (self.layer as? AVPlayerLayer)
     }
 
-    var player: AVPlayer? {
+    @objc var player: AVPlayer? {
         get {
             return playerLayer?.player
         }
@@ -55,9 +55,9 @@ class VideoPlayerPlaybackView: UIView {
         }
     }
 
-    var isCroppingToActivePicture = false {
+    @objc var isCroppingToActivePicture = false {
         didSet {
-            playerLayer?.videoGravity = (isCroppingToActivePicture ? AVLayerVideoGravityResizeAspectFill : AVLayerVideoGravityResizeAspect)
+            playerLayer?.videoGravity = convertToAVLayerVideoGravity((isCroppingToActivePicture ? AVLayerVideoGravity.resizeAspectFill.rawValue : AVLayerVideoGravity.resizeAspect.rawValue))
         }
     }
 
@@ -99,8 +99,8 @@ class VideoPlayerViewController: UIViewController {
     }
 
     var mode = VideoPlayerMode.supplemental
-    var shouldMute = false
-    var shouldTrackOutput = false
+    @objc var shouldMute = false
+    @objc var shouldTrackOutput = false
 
     fileprivate var playbackAsset: PlaybackAsset? {
         didSet {
@@ -124,7 +124,7 @@ class VideoPlayerViewController: UIViewController {
     private var originalContainerView: UIView?
 
     // State
-    var didPlayInterstitial = false
+    @objc var didPlayInterstitial = false
     private var isManuallyPaused = false
     private var isSeeking = false
     private var lastNotifiedTime = -1.0
@@ -217,7 +217,7 @@ class VideoPlayerViewController: UIViewController {
         return (player?.currentItem?.isPlaybackBufferEmpty ?? false)
     }
 
-    var screenGrab: UIImage? {
+    @objc var screenGrab: UIImage? {
         if let playerItem = player?.currentItem, let cvPixelBuffer = (playerItem.outputs.first as? AVPlayerItemVideoOutput)?.copyPixelBuffer(forItemTime: playerItem.currentTime(), itemTimeForDisplay: nil) {
             return UIImage(ciImage: CIImage(cvPixelBuffer: cvPixelBuffer))
         }
@@ -226,7 +226,7 @@ class VideoPlayerViewController: UIViewController {
     }
 
     // Asset
-    var url: URL? {
+    @objc var url: URL? {
         return (player?.currentItem?.asset as? AVURLAsset)?.url
     }
 
@@ -348,7 +348,7 @@ class VideoPlayerViewController: UIViewController {
     }
 
     private var activityIndicator: MBProgressHUD?
-    var activityIndicatorDisabled = false
+    @objc var activityIndicatorDisabled = false
     private var activityIndicatorVisible = false {
         didSet {
             if activityIndicatorVisible && !activityIndicatorDisabled {
@@ -554,7 +554,7 @@ class VideoPlayerViewController: UIViewController {
         }
     }
 
-    var playerItemDuration: Double = 0 {
+    @objc var playerItemDuration: Double = 0 {
         didSet {
             if !playerItemDuration.isFinite {
                 playerItemDuration = 0
@@ -571,7 +571,7 @@ class VideoPlayerViewController: UIViewController {
         }
     }
 
-    var currentTime: Double {
+    @objc var currentTime: Double {
         if isCastingActive {
             return CastManager.sharedInstance.currentTime
         }
@@ -584,8 +584,8 @@ class VideoPlayerViewController: UIViewController {
     }
 
     // Countdown/Queue
-    var queueTotalCount = 0
-    var queueCurrentIndex = 0
+    @objc var queueTotalCount = 0
+    @objc var queueCurrentIndex = 0
     private var countdownSeconds: CGFloat = 0 {
         didSet {
             countdownLabel.text = String.localize("label.time.seconds", variables: ["count": String(Int(Constants.CountdownTotalTime - countdownSeconds))])
@@ -699,7 +699,7 @@ class VideoPlayerViewController: UIViewController {
         playbackAsset = nil
     }
 
-    func removeCurrentItem() {
+    @objc func removeCurrentItem() {
         player?.replaceCurrentItem(with: nil)
         state = .unknown
     }
@@ -708,7 +708,11 @@ class VideoPlayerViewController: UIViewController {
     override func viewDidLoad() {
         // Setup audio to be heard even if device is on silent
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            if #available(iOS 10.0, *) {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)), mode: AVAudioSession.Mode.default)
+            } else {
+                // Fallback on earlier versions
+            }
         } catch {
             print("Error setting AVAudioSession category: \(error)")
         }
@@ -915,14 +919,14 @@ class VideoPlayerViewController: UIViewController {
 
         if !didPlayInterstitial {
             let currentOrientation = UIApplication.shared.statusBarOrientation
-            skipContainerLandscapeHeightConstraint?.isActive = UIInterfaceOrientationIsLandscape(currentOrientation)
-            skipContainerPortraitHeightConstraint?.isActive = UIInterfaceOrientationIsPortrait(currentOrientation)
+            skipContainerLandscapeHeightConstraint?.isActive = currentOrientation.isLandscape
+            skipContainerPortraitHeightConstraint?.isActive = currentOrientation.isPortrait
             countdownProgressView?.frame = skipCountdownContainerView.frame
         }
     }
 
-    override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController: parent)
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
 
         if parent == nil && !isCastingActive {
             pauseVideo()
@@ -933,7 +937,7 @@ class VideoPlayerViewController: UIViewController {
         /* If the item has a AVMetadataCommonKeyTitle metadata, use that instead. */
         if let items = player?.currentItem?.asset.commonMetadata {
             for item in items {
-                if item.commonKey == AVMetadataCommonKeyTitle {
+                if convertFromOptionalAVMetadataKey(item.commonKey) == convertFromAVMetadataKey(AVMetadataKey.commonKeyTitle) {
                     self.title = item.stringValue
                     return
                 }
@@ -1023,7 +1027,7 @@ class VideoPlayerViewController: UIViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         /* AVPlayerItem "status" property value observer. */
         if context == &ObservationContexts.Status {
-            if let statusNumber = (change?[NSKeyValueChangeKey.newKey] as? NSNumber)?.intValue, let status = AVPlayerStatus(rawValue: statusNumber) {
+            if let statusNumber = (change?[NSKeyValueChangeKey.newKey] as? NSNumber)?.intValue, let status = AVPlayer.Status(rawValue: statusNumber) {
                 switch status {
                     /* Indicates that the status of the player is not yet known because
                      it has not tried to load new media resources for playback */
@@ -1172,7 +1176,7 @@ class VideoPlayerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidReachEnd(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
 
         // Set up the captions options
-        if let group = asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristicLegible), group.options.first(where: { $0.locale != nil }) != nil {
+        if let group = asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.legible), group.options.first(where: { $0.locale != nil }) != nil {
             captionsSelectionGroup = group
             captionsButton?.isEnabled = true
             captionsOptionsTableView?.reloadData()
@@ -1181,7 +1185,7 @@ class VideoPlayerViewController: UIViewController {
         }
 
         // Set up commentary options
-        if let group = asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristicAudible), let option = group.options.first(where: { $0.displayName.lowercased().contains("commentary") }) {
+        if let group = asset.mediaSelectionGroup(forMediaCharacteristic: AVMediaCharacteristic.audible), let option = group.options.first(where: { $0.displayName.lowercased().contains("commentary") }) {
             audioSelectionGroup = group
             mainAudioSelectionOption = group.options.first
             commentaryAudioSelectionOption = option
@@ -1239,7 +1243,7 @@ class VideoPlayerViewController: UIViewController {
         captionsOptionsTableView?.reloadData()
 
         var selectedIndex = 0
-        if UIAccessibilityIsClosedCaptioningEnabled() {
+        if UIAccessibility.isClosedCaptioningEnabled {
             if let index = captionsSelectionGroup?.options.index(where: { $0.locale?.identifier == Locale.current.identifier }) ?? captionsSelectionGroup?.options.index(where: { $0.locale?.identifier == Locale.current.identifier }) {
                 selectedIndex = index + 1
             } else if let index = CastManager.sharedInstance.currentTextTracks?.index(where: { $0.languageCode != nil && Locale(identifier: $0.languageCode!).identifier == Locale.current.identifier }) {
@@ -1277,7 +1281,7 @@ class VideoPlayerViewController: UIViewController {
         }
     }
 
-    public func pauseVideo() {
+    @objc public func pauseVideo() {
         // Pause media
         if isCastingActive {
             CastManager.sharedInstance.pauseMedia()
@@ -1606,7 +1610,7 @@ class VideoPlayerViewController: UIViewController {
         return 0
     }
 
-    func seekPlayer(to time: Double) {
+    @objc func seekPlayer(to time: Double) {
         isSeeking = true
         state = .videoSeeking
 
@@ -1616,9 +1620,9 @@ class VideoPlayerViewController: UIViewController {
             hasSeekedToPlaybackSyncStartTime = true
         } else if let player = player {
             let timescale = (player.currentItem?.duration.timescale ?? 1)
-            let scaledTime = CMTimeMakeWithSeconds(time, timescale)
+            let scaledTime = CMTimeMakeWithSeconds(time, preferredTimescale: timescale)
             if scaledTime.isValid {
-                player.seek(to: scaledTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero, completionHandler: { [weak self] (finished) in
+                player.seek(to: scaledTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero, completionHandler: { [weak self] (finished) in
                     if finished {
                         DispatchQueue.main.async {
                             self?.isSeeking = false
@@ -1864,7 +1868,7 @@ class VideoPlayerViewController: UIViewController {
                 playerTimeObserver = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(syncScrubber), userInfo: nil, repeats: true)
             } else if let player = player {
                 let timescale = (player.currentItem?.duration.timescale ?? 1)
-                playerTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, timescale), queue: nil, using: { [weak self] (_) in
+                playerTimeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: timescale), queue: nil, using: { [weak self] (_) in
                     self?.syncScrubber()
                 })
             }
@@ -1978,7 +1982,7 @@ extension VideoPlayerViewController: AVPictureInPictureControllerDelegate {
         self.pictureInPictureButton?.isEnabled = playerControlsEnabled
     }
 
-    func picture(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: Error) {
+    func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, failedToStartPictureInPictureWithError error: Error) {
         let alertController = UIAlertController(title: "", message: String.localize("player.message.pip.error"), preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
@@ -2065,4 +2069,25 @@ extension VideoPlayerViewController: GCKRemoteMediaClientListener {
         updateWithMediaStatus(mediaStatus)
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToAVLayerVideoGravity(_ input: String) -> AVLayerVideoGravity {
+	return AVLayerVideoGravity(rawValue: input)
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromOptionalAVMetadataKey(_ input: AVMetadataKey?) -> String? {
+	guard let input = input else { return nil }
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVMetadataKey(_ input: AVMetadataKey) -> String {
+	return input.rawValue
 }

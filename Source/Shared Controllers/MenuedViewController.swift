@@ -14,7 +14,7 @@ class MenuedViewController: ExtrasExperienceViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        menuTableView?.separatorStyle = UITableViewCellSeparatorStyle.none
+        menuTableView?.separatorStyle = UITableViewCell.SeparatorStyle.none
         menuTableView?.register(UINib(nibName: MenuSectionCell.NibName, bundle: Bundle.frameworkResources), forCellReuseIdentifier: MenuSectionCell.ReuseIdentifier)
         menuTableView?.register(UINib(nibName: MenuItemCell.NibName, bundle: Bundle.frameworkResources), forCellReuseIdentifier: MenuItemCell.ReuseIdentifier)
     }
@@ -103,7 +103,7 @@ extension MenuedViewController: UITableViewDelegate {
 
             CATransaction.begin()
             CATransaction.setCompletionBlock(updateActiveCells)
-            tableView.reloadSections(IndexSet(integer: indexPath.section), with: UITableViewRowAnimation.none)
+            tableView.reloadSections(IndexSet(integer: indexPath.section), with: UITableView.RowAnimation.none)
             CATransaction.commit()
         } else {
             selectedItemValue = menuSection.item(atIndex: indexPath.row - 1)?.value

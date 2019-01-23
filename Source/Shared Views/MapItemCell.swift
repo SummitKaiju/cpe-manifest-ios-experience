@@ -7,14 +7,14 @@ import CPEData
 
 class MapItemCell: UICollectionViewCell {
 
-    static let NibName = "MapItemCell"
-    static let ReuseIdentifier = "MapItemCellReuseIdentifier"
+    @objc static let NibName = "MapItemCell"
+    @objc static let ReuseIdentifier = "MapItemCellReuseIdentifier"
 
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton!
 
-    var title: String? {
+    @objc var title: String? {
         set {
             titleLabel.text = newValue
         }
@@ -24,7 +24,7 @@ class MapItemCell: UICollectionViewCell {
         }
     }
 
-    var imageURL: URL? {
+    @objc var imageURL: URL? {
         set {
             if let imageURL = newValue {
                 imageView.sd_setImage(with: imageURL)
@@ -39,7 +39,7 @@ class MapItemCell: UICollectionViewCell {
         }
     }
 
-    var playButtonVisible: Bool {
+    @objc var playButtonVisible: Bool {
         set {
             playButton.isHidden = !newValue
         }

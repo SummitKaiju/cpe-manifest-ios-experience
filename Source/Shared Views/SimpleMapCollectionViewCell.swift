@@ -7,13 +7,13 @@ import MapKit
 
 class SimpleMapCollectionViewCell: UICollectionViewCell {
 
-    static let NibName = "SimpleMapCollectionViewCell"
-    static let ReuseIdentifier = "SimpleMapCollectionViewCellReuseIdentifier"
+    @objc static let NibName = "SimpleMapCollectionViewCell"
+    @objc static let ReuseIdentifier = "SimpleMapCollectionViewCellReuseIdentifier"
 
     @IBOutlet weak private var mapView: MultiMapView!
     @IBOutlet weak private var mapTextLabel: UILabel?
 
-    func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Int) {
+    @objc func setLocation(_ location: CLLocationCoordinate2D, zoomLevel: Int) {
         mapView.setLocation(location, zoomLevel: zoomLevel, animated: false)
     }
 

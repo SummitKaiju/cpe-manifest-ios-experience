@@ -7,8 +7,8 @@ import CPEData
 
 class TitledImageCell: UICollectionViewCell {
 
-    static let NibName = "TitledImageCell"
-    static let ReuseIdentifier = "TitledImageCellReuseIdentifier"
+    @objc static let NibName = "TitledImageCell"
+    @objc static let ReuseIdentifier = "TitledImageCellReuseIdentifier"
 
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
@@ -20,7 +20,7 @@ class TitledImageCell: UICollectionViewCell {
         }
     }
 
-    var title: String? {
+    @objc var title: String? {
         set {
             titleLabel.text = newValue?.uppercased()
         }
@@ -30,7 +30,7 @@ class TitledImageCell: UICollectionViewCell {
         }
     }
 
-    var imageURL: URL? {
+    @objc var imageURL: URL? {
         set {
             if let url = newValue {
                 imageView.sd_setImage(with: url)

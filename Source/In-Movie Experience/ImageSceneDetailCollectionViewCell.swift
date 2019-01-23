@@ -7,10 +7,10 @@ import UIKit
 
 class ImageSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
 
-    static let NibName = "ImageSceneDetailCollectionViewCell"
-    static let NibNameClipShare = "ClipShareSceneDetailCollectionViewCell"
-    static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
-    static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
+    @objc static let NibName = "ImageSceneDetailCollectionViewCell"
+    @objc static let NibNameClipShare = "ClipShareSceneDetailCollectionViewCell"
+    @objc static let ReuseIdentifier = "ImageSceneDetailCollectionViewCellReuseIdentifier"
+    @objc static let ClipShareReuseIdentifier = "ClipShareSceneDetailCollectionViewCellReuseIdentifier"
 
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var playButton: UIButton!

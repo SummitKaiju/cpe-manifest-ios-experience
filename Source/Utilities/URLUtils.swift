@@ -27,7 +27,7 @@ extension URL {
     }
 
     public func promptLaunch(withMessage message: String?, cancelHandler: (() -> Void)? = nil) {
-        let alertController = UIAlertController(title: String.localize("info.leaving_app.title"), message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: String.localize("info.leaving_app.title"), message: message, preferredStyle: UIAlertController.Style.alert)
 
         alertController.addAction(UIAlertAction(title: String.localize("label.no"), style: .cancel, handler: { (_) -> Void in
             cancelHandler?()

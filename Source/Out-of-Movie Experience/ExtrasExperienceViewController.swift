@@ -19,7 +19,7 @@ class ExtrasExperienceViewController: UIViewController {
     }
 
     var experience: Experience!
-    var customTitle: String?
+    @objc var customTitle: String?
 
     private var _homeButton: UIButton!
     private var _backButton: UIButton!
@@ -34,7 +34,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleImageView.contentMode = .scaleAspectFit
             titleImageView.sd_setImage(with: titleImageURL)
             self.view.addSubview(titleImageView)
-            self.view.sendSubview(toBack: titleImageView)
+            self.view.sendSubviewToBack(titleImageView)
             titleView = titleImageView
         } else {
             let titleLabel = UILabel()
@@ -46,7 +46,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleLabel.textAlignment = .right
             titleLabel.textColor = UIColor(netHex: 0xdddddd)
             self.view.addSubview(titleLabel)
-            self.view.sendSubview(toBack: titleLabel)
+            self.view.sendSubviewToBack(titleLabel)
             titleView = titleLabel
         }
 
@@ -68,11 +68,11 @@ class ExtrasExperienceViewController: UIViewController {
 
         _homeButton = headerButton(String.localize("label.home"), imageName: "Home")
         self.view.addSubview(_homeButton)
-        self.view.sendSubview(toBack: _homeButton)
+        self.view.sendSubviewToBack(_homeButton)
 
         _backButton = headerButton(String.localize("label.back"), imageName: "Back Nav")
         self.view.addSubview(_backButton)
-        self.view.sendSubview(toBack: _backButton)
+        self.view.sendSubviewToBack(_backButton)
 
         if let titleTreatmentImageURL = CPEXMLSuite.current?.manifest.inMovieExperience.thumbnailImageURL {
             let titleTreatmentImageView = UIImageView()
@@ -81,7 +81,7 @@ class ExtrasExperienceViewController: UIViewController {
             titleTreatmentImageView.clipsToBounds = true
             titleTreatmentImageView.sd_setImage(with: titleTreatmentImageURL)
             self.view.addSubview(titleTreatmentImageView)
-            self.view.sendSubview(toBack: titleTreatmentImageView)
+            self.view.sendSubviewToBack(titleTreatmentImageView)
 
             if #available(iOS 9.0, *) {
                 titleTreatmentImageView.widthAnchor.constraint(equalTo: self.view.widthAnchor, multiplier: 0.4).isActive = true
@@ -107,7 +107,7 @@ class ExtrasExperienceViewController: UIViewController {
                 backgroundImageView.sd_setImage(with: backgroundImageURL)
                 backgroundImageView.contentMode = (nodeStyle.backgroundScaleMethod == .bestFit ? .scaleAspectFill : .scaleAspectFit)
                 self.view.addSubview(backgroundImageView)
-                self.view.sendSubview(toBack: backgroundImageView)
+                self.view.sendSubviewToBack(backgroundImageView)
 
                 if #available(iOS 9.0, *) {
                     backgroundImageView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
@@ -128,7 +128,7 @@ class ExtrasExperienceViewController: UIViewController {
         showBackButton()
     }
 
-    internal func headerButton(_ title: String, imageName: String) -> UIButton {
+    @objc internal func headerButton(_ title: String, imageName: String) -> UIButton {
         let button = UIButton(type: .custom)
         button.isHidden = true
         button.frame = CGRect(x: 0, y: StatusBarSize.HEIGHT, width: Constants.HeaderButtonWidth, height: Constants.TitleImageHeight)
@@ -142,12 +142,12 @@ class ExtrasExperienceViewController: UIViewController {
         return button
     }
 
-    internal func showHomeButton() {
+    @objc internal func showHomeButton() {
         _homeButton.isHidden = false
         _backButton.isHidden = true
     }
 
-    internal func showBackButton() {
+    @objc internal func showBackButton() {
         _homeButton.isHidden = true
         _backButton.isHidden = false
     }
@@ -161,7 +161,7 @@ class ExtrasExperienceViewController: UIViewController {
     }
 
     // MARK: Actions
-    internal func close() {
+    @objc internal func close() {
         self.dismiss(animated: true, completion: nil)
     }
 

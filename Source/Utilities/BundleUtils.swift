@@ -6,7 +6,7 @@ import Foundation
 
 extension Bundle {
 
-    static var frameworkResources: Bundle {
+    @objc static var frameworkResources: Bundle {
         
         // CocoaPod using bundles
         if let resourcesBundleURL = Bundle(for: HomeViewController.self).url(forResource: "CPEExperience", withExtension: "bundle"), let resourcesBundle = Bundle(url: resourcesBundleURL) {

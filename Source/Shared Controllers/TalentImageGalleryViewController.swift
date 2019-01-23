@@ -16,7 +16,7 @@ class TalentImageGalleryViewController: SceneDetailViewController {
     @IBOutlet weak private var galleryCollectionView: UICollectionView!
 
     var talent: Person!
-    var initialPage = 0
+    @objc var initialPage = 0
 
     private var galleryDidScrollToPageObserver: NSObjectProtocol?
 
@@ -37,7 +37,7 @@ class TalentImageGalleryViewController: SceneDetailViewController {
         galleryDidScrollToPageObserver = NotificationCenter.default.addObserver(forName: .imageGalleryDidScrollToPage, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
             if let strongSelf = self, let page = notification.userInfo?[NotificationConstants.page] as? Int {
                 let pageIndexPath = IndexPath(item: page, section: 0)
-                strongSelf.galleryCollectionView.selectItem(at: pageIndexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
+                strongSelf.galleryCollectionView.selectItem(at: pageIndexPath, animated: false, scrollPosition: UICollectionView.ScrollPosition())
 
                 var cellIsShowing = false
                 for cell in strongSelf.galleryCollectionView.visibleCells {

@@ -7,9 +7,9 @@ import CPEData
 
 class TalentTableViewCell: UITableViewCell {
 
-    static let NibNameNarrow = "TalentTableViewCell-Narrow"
-    static let NibNameWide = "TalentTableViewCell-Wide"
-    static let ReuseIdentifier = "TalentTableViewCell"
+    @objc static let NibNameNarrow = "TalentTableViewCell-Narrow"
+    @objc static let NibNameWide = "TalentTableViewCell-Wide"
+    @objc static let ReuseIdentifier = "TalentTableViewCell"
 
     @IBOutlet weak private var talentImageView: UIImageView!
     @IBOutlet weak private var talentInitialLabel: UILabel!

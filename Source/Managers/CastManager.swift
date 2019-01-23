@@ -10,15 +10,15 @@ import GoogleCast
         static let AssetId = "assetId"
     }
 
-    public static let sharedInstance = CastManager()
+    @objc public static let sharedInstance = CastManager()
 
-    public var isInitialized = false
+    @objc public var isInitialized = false
 
-    open var hasDiscoveredDevices: Bool {
+    @objc open var hasDiscoveredDevices: Bool {
         return (isInitialized && GCKCastContext.sharedInstance().discoveryManager.hasDiscoveredDevices)
     }
 
-    open var currentSession: GCKCastSession? {
+    @objc open var currentSession: GCKCastSession? {
         if isInitialized {
             return GCKCastContext.sharedInstance().sessionManager.currentCastSession
         }
@@ -26,27 +26,27 @@ import GoogleCast
         return nil
     }
 
-    open var currentMediaStatus: GCKMediaStatus? {
+    @objc open var currentMediaStatus: GCKMediaStatus? {
         return currentSession?.remoteMediaClient?.mediaStatus
     }
 
-    open var hasConnectedCastSession: Bool {
+    @objc open var hasConnectedCastSession: Bool {
         return (isInitialized && GCKCastContext.sharedInstance().sessionManager.hasConnectedCastSession())
     }
 
-    open var currentTime: Double {
+    @objc open var currentTime: Double {
         return (currentSession?.remoteMediaClient?.approximateStreamPosition() ?? 0)
     }
 
-    open var streamDuration: Double {
+    @objc open var streamDuration: Double {
         return (currentMediaStatus?.mediaInformation?.streamDuration ?? 0)
     }
 
-    open var currentAssetId: String? {
+    @objc open var currentAssetId: String? {
         return ((currentMediaStatus?.mediaInformation?.customData as? [String: Any])?[Keys.AssetId] as? String)
     }
 
-    open var currentAssetURL: URL? {
+    @objc open var currentAssetURL: URL? {
         if let contentID = currentMediaStatus?.mediaInformation?.contentID {
             return URL(string: contentID)
         }
@@ -54,29 +54,29 @@ import GoogleCast
         return nil
     }
 
-    open var currentTextTracks: [GCKMediaTrack]? {
+    @objc open var currentTextTracks: [GCKMediaTrack]? {
         return currentMediaStatus?.mediaInformation?.mediaTracks?.filter({ $0.type == .text })
     }
 
-    open var isPlaying: Bool {
+    @objc open var isPlaying: Bool {
         return (currentMediaStatus != nil && currentMediaStatus!.playerState == .playing)
     }
 
-    public var currentPlaybackAsset: PlaybackAsset?
+    @objc public var currentPlaybackAsset: PlaybackAsset?
     public var currentVideoPlayerMode = VideoPlayerMode.unknown
 
-    open func start(withReceiverAppID receiverAppID: String) {
+    @objc open func start(withReceiverAppID receiverAppID: String) {
         GCKCastContext.setSharedInstanceWith(GCKCastOptions(receiverApplicationID: receiverAppID))
         GCKCastContext.sharedInstance().sessionManager.add(self)
         GCKLogger.sharedInstance().delegate = self
         isInitialized = true
     }
 
-    open func load(mediaInfo: GCKMediaInformation, playPosition: Double = 0) {
+    @objc open func load(mediaInfo: GCKMediaInformation, playPosition: Double = 0) {
         currentSession?.remoteMediaClient?.loadMedia(mediaInfo, autoplay: true, playPosition: playPosition)
     }
 
-    open func load(playbackAsset: PlaybackAsset) {
+    @objc open func load(playbackAsset: PlaybackAsset) {
         let metadata = GCKMediaMetadata(metadataType: .movie)
         metadata.setString(playbackAsset.assetTitle ?? "", forKey: kGCKMetadataKeyTitle)
         if let imageURL = playbackAsset.assetImageURL {
@@ -117,65 +117,65 @@ import GoogleCast
         currentPlaybackAsset = playbackAsset
     }
 
-    open func add(remoteMediaClientListener listener: GCKRemoteMediaClientListener) {
+    @objc open func add(remoteMediaClientListener listener: GCKRemoteMediaClientListener) {
         currentSession?.remoteMediaClient?.add(listener)
     }
 
-    open func add(sessionManagerListener listener: GCKSessionManagerListener) {
+    @objc open func add(sessionManagerListener listener: GCKSessionManagerListener) {
         if isInitialized {
             GCKCastContext.sharedInstance().sessionManager.add(listener)
         }
     }
 
-    open func add(discoveryManagerListener listener: GCKDiscoveryManagerListener) {
+    @objc open func add(discoveryManagerListener listener: GCKDiscoveryManagerListener) {
         if isInitialized {
             GCKCastContext.sharedInstance().discoveryManager.add(listener)
         }
     }
 
-    open func remove(remoteMediaClientListener listener: GCKRemoteMediaClientListener) {
+    @objc open func remove(remoteMediaClientListener listener: GCKRemoteMediaClientListener) {
         currentSession?.remoteMediaClient?.remove(listener)
     }
 
-    open func remove(sessionManagerListener listener: GCKSessionManagerListener) {
+    @objc open func remove(sessionManagerListener listener: GCKSessionManagerListener) {
         if isInitialized {
             GCKCastContext.sharedInstance().sessionManager.remove(listener)
         }
     }
 
-    open func remove(discoveryManagerListener listener: GCKDiscoveryManagerListener) {
+    @objc open func remove(discoveryManagerListener listener: GCKDiscoveryManagerListener) {
         if isInitialized {
             GCKCastContext.sharedInstance().discoveryManager.remove(listener)
         }
     }
 
-    open func playMedia() {
+    @objc open func playMedia() {
         currentSession?.remoteMediaClient?.play()
     }
 
-    open func pauseMedia() {
+    @objc open func pauseMedia() {
         currentSession?.remoteMediaClient?.pause()
     }
 
-    open func stopMedia() {
+    @objc open func stopMedia() {
         currentSession?.remoteMediaClient?.stop()
     }
 
-    open func seekMedia(to time: Double) {
+    @objc open func seekMedia(to time: Double) {
         currentSession?.remoteMediaClient?.seek(toTimeInterval: time, resumeState: .play)
     }
 
-    open func selectTextTrack(withLanguageCode languageCode: String) {
+    @objc open func selectTextTrack(withLanguageCode languageCode: String) {
         if let identifier = currentMediaStatus?.mediaInformation?.mediaTracks?.first(where: { $0.languageCode != nil && $0.languageCode! == languageCode })?.identifier {
             selectTextTrack(withIdentifier: identifier)
         }
     }
 
-    open func selectTextTrack(withIdentifier identifier: Int) {
+    @objc open func selectTextTrack(withIdentifier identifier: Int) {
         currentSession?.remoteMediaClient?.setActiveTrackIDs([NSNumber(value: identifier)])
     }
 
-    open func disableTextTracks() {
+    @objc open func disableTextTracks() {
         currentSession?.remoteMediaClient?.setActiveTrackIDs(nil)
     }
 

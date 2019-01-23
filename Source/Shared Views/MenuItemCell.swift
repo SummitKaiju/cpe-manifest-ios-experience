@@ -7,8 +7,8 @@ import QuartzCore
 
 class MenuItemCell: UITableViewCell {
 
-    static let NibName = "MenuItemCell"
-    static let ReuseIdentifier = "MenuItemCellReuseIdentifier"
+    @objc static let NibName = "MenuItemCell"
+    @objc static let ReuseIdentifier = "MenuItemCellReuseIdentifier"
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet var titleLabelLargePaddingConstraint: NSLayoutConstraint!
@@ -19,7 +19,7 @@ class MenuItemCell: UITableViewCell {
         }
     }
 
-    var active = false {
+    @objc var active = false {
         didSet {
             updateCellStyle()
         }
@@ -33,7 +33,7 @@ class MenuItemCell: UITableViewCell {
         titleLabelLargePaddingConstraint.isActive = true
     }
 
-    func updateCellStyle() {
+    @objc func updateCellStyle() {
         titleLabel.textColor = (self.active ? UIColor.themePrimary : UIColor.white)
     }
 

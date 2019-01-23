@@ -9,7 +9,7 @@ import MBProgressHUD
 class ExtrasShoppingViewController: MenuedViewController {
 
     private var extrasShoppingItemsViewController: ExtrasShoppingItemsViewController? {
-        for viewController in self.childViewControllers {
+        for viewController in self.children {
             if let viewController = viewController as? ExtrasShoppingItemsViewController {
                 return viewController
             }
@@ -94,12 +94,12 @@ class ExtrasShoppingViewController: MenuedViewController {
             if let menuTableView = menuTableView {
                 let selectedPath = IndexPath(row: 0, section: 0)
                 if menuTableView.cellForRow(at: selectedPath) != nil {
-                    menuTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+                    menuTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableView.ScrollPosition.top)
                     self.tableView(menuTableView, didSelectRowAt: selectedPath)
                     if let menuSection = menuSections.first {
                         if menuSection.isExpandable {
                             let selectedPath = IndexPath(row: 1, section: 0)
-                            menuTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableViewScrollPosition.top)
+                            menuTableView.selectRow(at: selectedPath, animated: false, scrollPosition: UITableView.ScrollPosition.top)
                             self.tableView(menuTableView, didSelectRowAt: selectedPath)
                         }
 

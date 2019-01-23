@@ -19,7 +19,7 @@ class InMovieExperienceViewController: UIViewController {
     private var externalPlaybackDidToggleObserver: NSObjectProtocol?
 
     private var videoPlayerViewController: VideoPlayerViewController? {
-        for viewController in self.childViewControllers {
+        for viewController in self.children {
             if let videoPlayerViewController = viewController as? VideoPlayerViewController {
                 return videoPlayerViewController
             }
@@ -43,7 +43,7 @@ class InMovieExperienceViewController: UIViewController {
     private var extrasContainerViewHidden: Bool = false {
         didSet {
             extrasContainerView.isHidden = extrasContainerViewHidden
-            for viewController in self.childViewControllers {
+            for viewController in self.children {
                 if let viewController = (viewController as? UINavigationController)?.viewControllers.first as? InMovieExperienceExtrasViewController {
                     viewController.view.isHidden = extrasContainerView.isHidden
                     return
@@ -72,11 +72,11 @@ class InMovieExperienceViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        extrasContainerViewHidden = UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
+        extrasContainerViewHidden = UIApplication.shared.statusBarOrientation.isLandscape
         updatePlayerConstraints()
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return extrasContainerViewHidden
     }
 

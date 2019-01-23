@@ -16,7 +16,7 @@ class ExtrasShoppingItemsViewController: UIViewController {
 
     @IBOutlet weak private var productsCollectionView: UICollectionView!
 
-    var products: [ProductItem]? {
+    @objc var products: [ProductItem]? {
         didSet {
             productsCollectionView.reloadData()
             if let products = products, products.count > 0 {

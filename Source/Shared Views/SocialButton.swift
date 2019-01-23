@@ -33,7 +33,7 @@ class SocialButton: UIButton {
         self.layer.cornerRadius = self.frame.size.width / 2
     }
 
-    func openURL() {
+    @objc func openURL() {
         socialAccount.url?.promptLaunch()
     }
 

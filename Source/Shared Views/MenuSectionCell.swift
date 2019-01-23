@@ -7,8 +7,8 @@ import QuartzCore
 
 class MenuSectionCell: UITableViewCell {
 
-    static let NibName = "MenuSectionCell"
-    static let ReuseIdentifier = "MenuSectionCellReuseIdentifier"
+    @objc static let NibName = "MenuSectionCell"
+    @objc static let ReuseIdentifier = "MenuSectionCellReuseIdentifier"
 
     @IBOutlet weak private var titleLabel: UILabel!
     @IBOutlet weak private var dropDownImageView: UIImageView!
@@ -20,7 +20,7 @@ class MenuSectionCell: UITableViewCell {
         }
     }
 
-    var active = false {
+    @objc var active = false {
         didSet {
             updateCellStyle()
         }
@@ -41,18 +41,18 @@ class MenuSectionCell: UITableViewCell {
         }
     }
 
-    func updateCellStyle() {
+    @objc func updateCellStyle() {
         titleLabel.textColor = self.active ? UIColor.themePrimary : UIColor.white
     }
 
-    func toggleDropDownIcon() {
+    @objc func toggleDropDownIcon() {
         if let section = menuSection {
             let rotate = CABasicAnimation(keyPath: "transform.rotation.z")
             rotate.fromValue = (section.isExpanded ? 0.0 : CGFloat(Double.pi * -1))
             rotate.toValue = (section.isExpanded ? CGFloat(Double.pi * -1) : 0.0)
             rotate.duration = 0.25
             rotate.autoreverses = true
-            rotate.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            rotate.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
             dropDownImageView.layer.add(rotate, forKey: nil)
         }
     }

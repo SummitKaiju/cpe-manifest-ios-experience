@@ -145,24 +145,24 @@ extension InputViewController: ExperienceDelegate {
         // Respond to any changes in the user's connection status (e.g. display prompt about cellular data usage)
     }
 
-    func experienceWillOpen() {
+    @objc func experienceWillOpen() {
         // Any start-up tasks
     }
 
-    func experienceWillClose() {
+    @objc func experienceWillClose() {
         // Any shutdown tasks
     }
 
-    func experienceWillEnterDebugMode() {
+    @objc func experienceWillEnterDebugMode() {
         // Perform any debug tasks or unlock any debug sections of the app
         // Debug mode is activated by tapping and holding the "Extras" button on the home screen for five seconds
     }
 
-    public func previewModeShouldLaunchBuy() {
+    @objc public func previewModeShouldLaunchBuy() {
         // Callback for when the user taps the home screen buy button
     }
 
-    func interstitialShouldPlayMultipleTimes() -> Bool {
+    @objc func interstitialShouldPlayMultipleTimes() -> Bool {
         // Return true if interstitial video should play again after user has already seen it (with ability to skip)
         return true
     }
@@ -198,7 +198,7 @@ extension InputViewController: ExperienceDelegate {
         }
     }
 
-    func didTapFilmography(forTitle title: String, fromViewController viewController: UIViewController) {
+    @objc func didTapFilmography(forTitle title: String, fromViewController viewController: UIViewController) {
         let showQueryNotFound = {
             let alertController = UIAlertController(title: "", message: "Sorry, but this movie is currently unavailable on iTunes", preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

@@ -44,8 +44,8 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController {
 
             talentDetailViewController.view.frame = talentDetailView.bounds
             talentDetailView.addSubview(talentDetailViewController.view)
-            self.addChildViewController(talentDetailViewController)
-            talentDetailViewController.didMove(toParentViewController: self)
+            self.addChild(talentDetailViewController)
+            talentDetailViewController.didMove(toParent: self)
 
             showBackButton()
 
@@ -89,9 +89,9 @@ class ExtrasTalentSelectorViewController: ExtrasExperienceViewController {
                     self.talentDetailView?.isHidden = true
                 }
 
-                self.talentDetailViewController?.willMove(toParentViewController: nil)
+                self.talentDetailViewController?.willMove(toParent: nil)
                 self.talentDetailViewController?.view.removeFromSuperview()
-                self.talentDetailViewController?.removeFromParentViewController()
+                self.talentDetailViewController?.removeFromParent()
                 self.talentDetailViewController = nil
                 completed?()
             })
@@ -140,7 +140,7 @@ extension ExtrasTalentSelectorViewController: UITableViewDelegate {
 
 extension ExtrasTalentSelectorViewController: TalentDetailViewPresenter {
 
-    func talentDetailViewShouldClose() {
+    @objc func talentDetailViewShouldClose() {
         hideTalentDetailView()
     }
 

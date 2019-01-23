@@ -218,7 +218,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
         return .all
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return (containerBottomConstraint != nil && !containerBottomConstraint!.isActive)
     }
 
@@ -232,8 +232,8 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
 
                 videoPlayerViewController.view.frame = videoContainerView.bounds
                 videoContainerView.addSubview(videoPlayerViewController.view)
-                self.addChildViewController(videoPlayerViewController)
-                videoPlayerViewController.didMove(toParentViewController: self)
+                self.addChild(videoPlayerViewController)
+                videoPlayerViewController.didMove(toParent: self)
 
                 if !DeviceType.IS_IPAD && videoPlayerViewController.fullScreenButton != nil {
                     videoPlayerViewController.fullScreenButton?.removeFromSuperview()
@@ -297,9 +297,9 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
             self.galleryScrollView.isHidden = true
             self.galleryPageControl.isHidden = true
 
-            self.videoPlayerViewController?.willMove(toParentViewController: nil)
+            self.videoPlayerViewController?.willMove(toParent: nil)
             self.videoPlayerViewController?.view.removeFromSuperview()
-            self.videoPlayerViewController?.removeFromParentViewController()
+            self.videoPlayerViewController?.removeFromParent()
             self.videoPlayerViewController = nil
         }
 
@@ -314,7 +314,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
         }
     }
 
-    func reloadBreadcrumbs() {
+    @objc func reloadBreadcrumbs() {
         breadcrumbsPrimaryButton.isUserInteractionEnabled = false
         breadcrumbsSecondaryArrowImageView.isHidden = true
         breadcrumbsSecondaryLabel.isHidden = true
@@ -410,7 +410,7 @@ class ExtrasSceneLocationsViewController: ExtrasExperienceViewController, UIColl
 
 extension ExtrasSceneLocationsViewController: MultiMapViewDelegate {
 
-    func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
+    @objc func mapView(_ mapView: MultiMapView, didTapMarker marker: MultiMapMarker) {
         for (experienceID, locationMarker) in markers {
             if marker == locationMarker {
                 selectedExperience = CPEXMLSuite.current!.manifest.experienceWithID(experienceID)

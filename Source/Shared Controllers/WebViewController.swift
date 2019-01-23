@@ -21,11 +21,11 @@ open class WebViewController: UIViewController {
 
     private var url: URL!
     private var webView: WKWebView!
-    public var hud: MBProgressHUD?
-    public var shouldDisplayFullScreen = true
+    @objc public var hud: MBProgressHUD?
+    @objc public var shouldDisplayFullScreen = true
     
     // MARK: Initialization
-    convenience public init(url: URL, title: String? = nil) {
+    @objc convenience public init(url: URL, title: String? = nil) {
         self.init()
         
         self.url = url
@@ -87,12 +87,12 @@ open class WebViewController: UIViewController {
         hud = MBProgressHUD.showAdded(to: webView, animated: true)
     }
     
-    override open func prefersHomeIndicatorAutoHidden() -> Bool {
+    override open var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
 
     // MARK: Actions
-    open func close() {
+    @objc open func close() {
         webView.configuration.userContentController.removeScriptMessageHandler(forName: Constants.ScriptMessageHandlerName)
         webView.navigationDelegate = nil
         self.dismiss(animated: true, completion: nil)

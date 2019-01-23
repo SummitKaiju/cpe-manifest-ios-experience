@@ -15,8 +15,8 @@ class SceneDetailViewController: UIViewController {
 
     var timedEvent: TimedEvent?
 
-    var titleLabel: UILabel!
-    var closeButton: UIButton!
+    @objc var titleLabel: UILabel!
+    @objc var closeButton: UIButton!
 
     private var shouldCloseDetailsObserver: NSObjectProtocol?
 
@@ -42,7 +42,7 @@ class SceneDetailViewController: UIViewController {
         titleLabel.text = (title ?? timedEvent?.experience?.title)?.uppercased()
         self.view.addSubview(titleLabel)
 
-        closeButton = UIButton(type: UIButtonType.custom)
+        closeButton = UIButton(type: UIButton.ButtonType.custom)
         closeButton.titleLabel?.font = UIFont.themeCondensedFont(DeviceType.IS_IPAD ? 17 : 15)
         closeButton.setTitle(String.localize("label.close"), for: .normal)
         closeButton.setImage(UIImage(named: "Close", in: Bundle.frameworkResources, compatibleWith: nil), for: .normal)
@@ -62,7 +62,7 @@ class SceneDetailViewController: UIViewController {
     }
 
     // MARK: Actions
-    internal func onClose() {
+    @objc internal func onClose() {
         self.dismiss(animated: true, completion: nil)
         NotificationCenter.default.post(name: .videoPlayerCanResume, object: nil)
     }

@@ -6,13 +6,13 @@ import UIKit
 
 class DropdownTableViewCell: UITableViewCell {
 
-    static let NibName = "DropdownTableViewCell"
-    static let ReuseIdentifier = "DropdownTableViewCellReuseIdentifier"
+    @objc static let NibName = "DropdownTableViewCell"
+    @objc static let ReuseIdentifier = "DropdownTableViewCellReuseIdentifier"
 
     @IBOutlet private weak var iconImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
 
-    var title: String? {
+    @objc var title: String? {
         get {
             return titleLabel.text
         }
@@ -41,7 +41,7 @@ class DropdownTableViewCell: UITableViewCell {
         updateStyle()
     }
 
-    func updateStyle() {
+    @objc func updateStyle() {
         self.contentView.backgroundColor = UIColor.clear
         self.backgroundColor = UIColor.clear
     }

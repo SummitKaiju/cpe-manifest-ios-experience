@@ -80,7 +80,7 @@ class SceneDetailCollectionViewController: UICollectionViewController, UICollect
         self.collectionViewLayout.invalidateLayout()
     }
 
-    func processTimedEvents(_ time: Double) {
+    @objc func processTimedEvents(_ time: Double) {
         DispatchQueue.global(qos: .userInitiated).async {
             self._currentTime = time
 

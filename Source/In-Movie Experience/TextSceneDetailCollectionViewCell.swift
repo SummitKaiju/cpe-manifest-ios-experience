@@ -7,8 +7,8 @@ import UIKit
 
 class TextSceneDetailCollectionViewCell: SceneDetailCollectionViewCell {
 
-    static let NibName = "TextSceneDetailCollectionViewCell"
-    static let ReuseIdentifier = "TextSceneDetailCollectionViewCellReuseIdentifier"
+    @objc static let NibName = "TextSceneDetailCollectionViewCell"
+    @objc static let ReuseIdentifier = "TextSceneDetailCollectionViewCellReuseIdentifier"
 
     override internal var descriptionText: String? {
         set {

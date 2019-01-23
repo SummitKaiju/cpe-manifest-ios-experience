@@ -8,7 +8,7 @@ class RadioButton: UIButton {
 
     var section: Int?
     var index: Int?
-    var selection = CAShapeLayer()
+    @objc var selection = CAShapeLayer()
 
     override var isSelected: Bool {
         didSet {
@@ -27,7 +27,7 @@ class RadioButton: UIButton {
         initialize()
     }
 
-    func initialize() {
+    @objc func initialize() {
 
         self.isUserInteractionEnabled = true
         self.clipsToBounds = true
@@ -43,7 +43,7 @@ class RadioButton: UIButton {
         self.layer.addSublayer(selection)
     }
 
-    func toggleButon() {
+    @objc func toggleButon() {
         if self.isSelected {
             highlight()
 
@@ -53,7 +53,7 @@ class RadioButton: UIButton {
     }
     }
 
-    func highlight() {
+    @objc func highlight() {
         //self.selected = !self.selected
 
         selection.backgroundColor = UIColor.init(red: 255/255, green: 205/255, blue: 77/255, alpha: 1).cgColor
@@ -61,7 +61,7 @@ class RadioButton: UIButton {
 
     }
 
-    func removeHighlight() {
+    @objc func removeHighlight() {
         //self.selected = !self.selected
 
         selection.backgroundColor = UIColor.clear.cgColor

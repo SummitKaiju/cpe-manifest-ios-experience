@@ -82,8 +82,8 @@ class ExtrasViewController: ExtrasExperienceViewController {
 
             talentDetailViewController.view.frame = talentDetailView.bounds
             talentDetailView.addSubview(talentDetailViewController.view)
-            self.addChildViewController(talentDetailViewController)
-            talentDetailViewController.didMove(toParentViewController: self)
+            self.addChild(talentDetailViewController)
+            talentDetailViewController.didMove(toParent: self)
 
             showBackButton()
 
@@ -128,9 +128,9 @@ class ExtrasViewController: ExtrasExperienceViewController {
                     self.talentDetailView?.isHidden = true
                 }
 
-                self.talentDetailViewController?.willMove(toParentViewController: nil)
+                self.talentDetailViewController?.willMove(toParent: nil)
                 self.talentDetailViewController?.view.removeFromSuperview()
-                self.talentDetailViewController?.removeFromParentViewController()
+                self.talentDetailViewController?.removeFromParent()
                 self.talentDetailViewController = nil
                 completed?()
             })
@@ -171,11 +171,11 @@ extension ExtrasViewController: UITableViewDataSource {
             personSegmentedControl?.frame = CGRect(x: Constants.SegmentedControlPadding, y: 0, width: tableView.frame.width - (Constants.SegmentedControlPadding * 2), height: Constants.SegmentedControlHeight)
             personSegmentedControl?.tintColor = UIColor(netHex: 0xd61414)
             personSegmentedControl?.setTitleTextAttributes([
-                NSFontAttributeName: UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
-                NSForegroundColorAttributeName: UIColor.white
+                NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.font)): UIFont.systemFont(ofSize: Constants.SegmentedControlFontSize),
+                NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)): UIColor.white
                 ], for: .normal)
             personSegmentedControl?.setTitleTextAttributes([
-                NSForegroundColorAttributeName: UIColor.white
+                NSAttributedString.Key(rawValue: convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor)): UIColor.white
                 ], for: .selected)
             personSegmentedControl?.selectedSegmentIndex = 0
             personSegmentedControl?.addTarget(self, action: #selector(onSelectPersonJobFunction), for: .valueChanged)
@@ -229,7 +229,7 @@ extension ExtrasViewController: UITableViewDelegate {
 
 extension ExtrasViewController: TalentDetailViewPresenter {
 
-    func talentDetailViewShouldClose() {
+    @objc func talentDetailViewShouldClose() {
         hideTalentDetailView()
     }
 
@@ -342,4 +342,9 @@ extension ExtrasViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(top: Constants.CollectionViewPadding, left: Constants.CollectionViewPadding, bottom: Constants.CollectionViewPadding, right: Constants.CollectionViewPadding)
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }

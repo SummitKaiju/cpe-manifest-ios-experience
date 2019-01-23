@@ -49,7 +49,7 @@ class TalentDetailViewController: SceneDetailViewController {
     @IBOutlet weak private var facebookButton: SocialButton?
     @IBOutlet weak private var instagramButton: SocialButton?
 
-    var images = [String]()
+    @objc var images = [String]()
     var talent: Person!
     var mode = TalentDetailMode.Extras
 
@@ -125,11 +125,11 @@ class TalentDetailViewController: SceneDetailViewController {
                             do {
 
                                 let options: [String: Any] = [
-                                    NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType,
-                                    NSCharacterEncodingDocumentAttribute: NSNumber(value: String.Encoding.utf8.rawValue)
+                                    convertFromNSAttributedStringDocumentAttributeKey(NSAttributedString.DocumentAttributeKey.documentType): convertFromNSAttributedStringDocumentType(NSAttributedString.DocumentType.html),
+                                    convertFromNSAttributedStringDocumentAttributeKey(NSAttributedString.DocumentAttributeKey.characterEncoding): NSNumber(value: String.Encoding.utf8.rawValue)
                                 ]
 
-                                let attributedString = try NSAttributedString(data: biographyData, options: options, documentAttributes: nil)
+                                let attributedString = try NSAttributedString(data: biographyData, options: convertToNSAttributedStringDocumentReadingOptionKeyDictionary(options), documentAttributes: nil)
                                 self.talentBiographyLabel?.attributedText = attributedString
                             } catch {
                                 self.talentBiographyLabel?.text = biography
@@ -285,4 +285,19 @@ extension TalentDetailViewController: UICollectionViewDelegateFlowLayout {
         return Constants.GalleryCollectionViewItemSpacing
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringDocumentAttributeKey(_ input: NSAttributedString.DocumentAttributeKey) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringDocumentType(_ input: NSAttributedString.DocumentType) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringDocumentReadingOptionKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.DocumentReadingOptionKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.DocumentReadingOptionKey(rawValue: key), value)})
 }

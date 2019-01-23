@@ -14,12 +14,12 @@ open  class ExperienceLauncher {
     private static var reachabilityChangedObserver: NSObjectProtocol?
     static var isBeingDismissed = false
 
-    open static func launch(fromViewController viewController: UIViewController) {
+    public static func launch(fromViewController viewController: UIViewController) {
         SDWebImageCodersManager.sharedInstance().coders = [SimpleImageIOCoder.shared()]
         reachabilityChangedObserver = NotificationCenter.default.addObserver(forName: Notification.Name.reachabilityChanged, object: reachability, queue: OperationQueue.main) { (notification) in
             if let reachability = notification.object as? Reachability {
-                if reachability.isReachable {
-                    if reachability.isReachableViaWiFi {
+                if reachability.connection != .none {
+                    if reachability.connection == .wifi {
                         ExperienceLauncher.delegate?.connectionStatusChanged(status: .onWiFi)
                     } else {
                         ExperienceLauncher.delegate?.connectionStatusChanged(status: .onCellular)
@@ -41,7 +41,7 @@ open  class ExperienceLauncher {
         viewController.present(homeViewController!, animated: true, completion: nil)
     }
 
-    open static func close() {
+    public static func close() {
         isBeingDismissed = true
 
         if let observer = reachabilityChangedObserver {
